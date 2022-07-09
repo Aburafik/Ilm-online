@@ -64,7 +64,7 @@ class _SignInComponentState extends State<SignInComponent> {
               textColor: Colors.white,
               onPressed: () {
                 if (formKey.currentState!.validate()) {
-                  Navigator.pushNamed(context, '/Home-Decide-Screen');
+                  Navigator.pushNamed(context, '/Home-Screen');
                 }
               },
             ),
