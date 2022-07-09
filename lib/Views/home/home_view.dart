@@ -77,7 +77,8 @@ class BottomNavBarComponent extends StatelessWidget {
         BottomNavigationBarItem(icon: Icon(FeatherIcons.home), label: 'Home'),
         BottomNavigationBarItem(
             icon: Icon(FeatherIcons.search), label: 'Discover'),
-        BottomNavigationBarItem(icon: Icon(FeatherIcons.heart), label: 'Give'),
+        BottomNavigationBarItem(
+            icon: Icon(FeatherIcons.heart), label: 'Donate'),
         BottomNavigationBarItem(
             icon: Icon(FeatherIcons.user), label: 'Profile'),
         BottomNavigationBarItem(
