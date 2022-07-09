@@ -5,6 +5,7 @@ import 'package:ilm_online_app/Views/authentication/sign_up_view.dart';
 import 'package:ilm_online_app/Views/home/home_decide.dart';
 import 'package:ilm_online_app/Views/home/home_view.dart';
 import 'package:ilm_online_app/Views/introScreen/splash_screen.dart';
+import 'package:ilm_online_app/Views/profile/profile_view.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
@@ -18,7 +19,7 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
             appBarTheme: AppBarTheme(
                 elevation: 0,
-                iconTheme: IconThemeData(color: LIGHT_BLACK_COLOR),
+                iconTheme: const IconThemeData(color: LIGHT_BLACK_COLOR),
                 backgroundColor: Theme.of(context).scaffoldBackgroundColor)),
         initialRoute: "/",
         routes: {
@@ -27,6 +28,7 @@ class MyApp extends StatelessWidget {
           "/Sign-in-Screen": (context) => const SignInVC(),
           "/Sign-up-Screen": (context) => const SignUpVC(),
           "/Home-Screen": (context) => const HomeVC(),
+          "/Profile-Screen": (context) => const ProfileVC(),
         });
   }
 }
