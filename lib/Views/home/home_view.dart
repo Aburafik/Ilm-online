@@ -6,7 +6,7 @@ import 'package:ilm_online_app/Components/utils/color_theme.dart';
 import 'package:ilm_online_app/Components/utils/constants.dart';
 import 'package:ilm_online_app/Views/discover/discover_view.dart';
 import 'package:ilm_online_app/Views/donate/donote_view.dart';
-import 'package:ilm_online_app/Views/home/home_category_view.dart';
+import 'package:ilm_online_app/Views/home/HomeCategories/home_category_view.dart';
 import 'package:ilm_online_app/Views/profile/profile_view.dart';
 import 'package:ilm_online_app/Views/questionsAndAnswers/questions_and_answers_view.dart';
 

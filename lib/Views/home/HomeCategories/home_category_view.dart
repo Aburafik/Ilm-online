@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ilm_online_app/Components/utils/color_theme.dart';
+import 'package:ilm_online_app/Views/home/HomeCategories/sermons_view.dart';
 import 'package:scroll_navigation/scroll_navigation.dart';
 
 class HomeCategoryVC extends StatelessWidget {
@@ -27,7 +28,7 @@ class HomeCategoryVC extends StatelessWidget {
             "ARTICLES",
           ],
           pages: [
-            Container(color: Colors.red[50]),
+            SermonVC(),
             Container(color: Colors.green[50]),
           ],
         ),

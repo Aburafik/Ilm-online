@@ -1,10 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:ilm_online_app/Components/utils/color_theme.dart';
-import 'package:ilm_online_app/Views/discover/discover_view.dart';
-import 'package:ilm_online_app/Views/donate/donote_view.dart';
-import 'package:ilm_online_app/Views/home/home_category_view.dart';
-import 'package:ilm_online_app/Views/profile/profile_view.dart';
-import 'package:ilm_online_app/Views/questionsAndAnswers/questions_and_answers_view.dart';
 
 Positioned notificationStatusIcon = Positioned(
   top: 10,
@@ -19,4 +14,11 @@ Positioned notificationStatusIcon = Positioned(
   ),
 );
 
-
+Padding sermonCategoryTitle() {
+  return const Padding(
+    padding: EdgeInsets.symmetric(vertical: 20),
+    child: Text("RECENT SERMONS",
+        style: TextStyle(
+            fontSize: 16, fontWeight: FontWeight.bold, color: BLACK_COLOR)),
+  );
+}
