@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_feather_icons/flutter_feather_icons.dart';
 import 'package:ilm_online_app/Components/utils/color_theme.dart';
 import 'package:ilm_online_app/Views/home/HomeCategories/sermons_view.dart';
 import 'package:scroll_navigation/scroll_navigation.dart';
@@ -27,10 +28,22 @@ class HomeCategoryVC extends StatelessWidget {
             "SERMONS",
             "ARTICLES",
           ],
-          pages: [
-            SermonVC(),
-            Container(color: Colors.green[50]),
-          ],
+          pages: [SermonVC(), ArticlesVC()],
+        ),
+      ),
+    );
+  }
+}
+
+class ArticlesVC extends StatelessWidget {
+  const ArticlesVC({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: SafeArea(
+        child: Center(
+          child: Text("Currently not Available"),
         ),
       ),
     );
