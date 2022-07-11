@@ -10,7 +10,7 @@ class RecentlyWatchedSermonsComponent extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       // color: Colors.grey,
-      height: MediaQuery.of(context).size.height * 0.25,
+      height: MediaQuery.of(context).size.height * 0.3,
       width: double.infinity,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
