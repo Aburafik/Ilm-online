@@ -25,36 +25,37 @@ class RecentlyWatchedSermonsComponent extends StatelessWidget {
           ),
           Expanded(
             child: ListView.builder(
-                itemCount: 50,
-                scrollDirection: Axis.horizontal,
-                itemBuilder: (context, index) => Padding(
-                      padding: const EdgeInsets.only(right: 14),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Expanded(
-                            child: Container(
-                              margin: const EdgeInsets.only(bottom: 5),
-                              width: 200,
-                              decoration: BoxDecoration(
-                                  color: LIGHT_GREY_COLOR,
-                                  borderRadius: BorderRadius.circular(10)),
-                            ),
-                          ),
-                          const Text(
-                            "Author name",
-                            style: TextStyle(
-                                color: BLACK_COLOR,
-                                fontSize: 16,
-                                fontWeight: FontWeight.w500),
-                          ),
-                          const Text(
-                            "Sermon Title",
-                            style: TextStyle(color: Colors.grey),
-                          )
-                        ],
+              itemCount: 50,
+              scrollDirection: Axis.horizontal,
+              itemBuilder: (context, index) => Padding(
+                padding: const EdgeInsets.only(right: 14),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Expanded(
+                      child: Container(
+                        margin: const EdgeInsets.only(bottom: 5),
+                        width: 200,
+                        decoration: BoxDecoration(
+                            color: LIGHT_GREY_COLOR,
+                            borderRadius: BorderRadius.circular(10)),
                       ),
-                    )),
+                    ),
+                    const Text(
+                      "Author name",
+                      style: TextStyle(
+                          color: BLACK_COLOR,
+                          fontSize: 16,
+                          fontWeight: FontWeight.w500),
+                    ),
+                    const Text(
+                      "Sermon Title",
+                      style: TextStyle(color: Colors.grey),
+                    )
+                  ],
+                ),
+              ),
+            ),
           )
         ],
       ),
