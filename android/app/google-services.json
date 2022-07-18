@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "176656721543",
+    "project_id": "ilm-online",
+    "storage_bucket": "ilm-online.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:176656721543:android:dfe004999780e04d6ffa22",
+        "android_client_info": {
+          "package_name": "com.example.ilm_online_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "176656721543-jgn9qto7l4td213nciqoq1ghl9pkqfu3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAOpDC8rIAa56bL9FfLIBzEfi-hPMDQ3Qk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "176656721543-jgn9qto7l4td213nciqoq1ghl9pkqfu3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
