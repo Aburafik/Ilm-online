@@ -10,28 +10,29 @@ class HomeCategoryVC extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-        child: TitleScrollNavigation(
-          identiferStyle: NavigationIdentiferStyle(
-            color: BLACK_COLOR,
+
+        body: SafeArea(
+          child: TitleScrollNavigation(
+            identiferStyle: NavigationIdentiferStyle(
+              color: BLACK_COLOR,
+            ),
+            barStyle: TitleNavigationBarStyle(
+              activeColor: BLACK_COLOR,
+              background: Theme.of(context).scaffoldBackgroundColor,
+              elevation: 0,
+              style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  backgroundColor: Theme.of(context).scaffoldBackgroundColor),
+              spaceBetween: MediaQuery.of(context).size.width / 2,
+            ),
+            titles: const [
+              "SERMONS",
+              "ARTICLES",
+            ],
+            pages: [SermonVC(), ArticlesVC()],
           ),
-          barStyle: TitleNavigationBarStyle(
-            activeColor: BLACK_COLOR,
-            background: Theme.of(context).scaffoldBackgroundColor,
-            elevation: 0,
-            style: TextStyle(
-                fontWeight: FontWeight.bold,
-                backgroundColor: Theme.of(context).scaffoldBackgroundColor),
-            spaceBetween: MediaQuery.of(context).size.width / 2,
-          ),
-          titles: const [
-            "SERMONS",
-            "ARTICLES",
-          ],
-          pages: [SermonVC(), ArticlesVC()],
         ),
-      ),
-    );
+        );
   }
 }
 

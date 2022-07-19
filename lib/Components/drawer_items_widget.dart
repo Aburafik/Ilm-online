@@ -1,16 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:ilm_online_app/Components/utils/color_theme.dart';
 
-class DrawerItemsWidget extends StatelessWidget {
-  DrawerItemsWidget(
-      {Key? key, this.icon, this.title, this.trailing, this.onTap})
-      : super(key: key);
-  IconData? icon;
-  String? title;
-  Widget? trailing;
-  void Function()? onTap;
-  @override
-  Widget build(BuildContext context) {
+
+  drawerTilesWidget({BuildContext? context,
+  
+   IconData? icon,
+  String? title,
+  Widget? trailing,
+  void Function()? onTap
+  
+  }) {
     return ListTile(
       trailing: trailing,
       leading: Icon(
@@ -23,8 +22,8 @@ class DrawerItemsWidget extends StatelessWidget {
       ),
       onTap: onTap ??
           () {
-            Navigator.pop(context);
+            Navigator.pop(context!);
           },
     );
   }
-}
+

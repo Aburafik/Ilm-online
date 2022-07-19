@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:ilm_online_app/Components/utils/color_theme.dart';
 import 'package:ilm_online_app/Views/authentication/sign_in_view.dart';
 import 'package:ilm_online_app/Views/authentication/sign_up_view.dart';
@@ -15,6 +16,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
         debugShowCheckedModeBanner: false,
+        builder: EasyLoading.init(),
         title: '',
         theme: ThemeData(
             appBarTheme: AppBarTheme(
@@ -32,3 +34,5 @@ class MyApp extends StatelessWidget {
         });
   }
 }
+
+

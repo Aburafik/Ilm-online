@@ -33,90 +33,89 @@ class ProfileVC extends StatelessWidget {
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20.0),
-              child: Expanded(
-                  child: Card(
+              child: Card(
                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10),
+              borderRadius: BorderRadius.circular(10),
                 ),
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 15),
-                  child: Column(
+              padding: const EdgeInsets.symmetric(horizontal: 15),
+              child: Column(
+                children: [
+                  Text(
+                    "Location",
+                    style: Theme.of(context)
+                        .textTheme
+                        .bodyText2!
+                        .copyWith(fontSize: 20),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text("Ghana, Tamale"),
+                  ),
+                  Divider(
+                    color: PRIMARY_COLOR,
+                  ),
+                  Text(
+                    "Bio",
+                    style: Theme.of(context)
+                        .textTheme
+                        .bodyText2!
+                        .copyWith(fontSize: 20),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(
+                        "lorem ipsum lorem ipsum lorem ipsum lorem ipsum loremlorem ipsum lorem ipsum lorem "),
+                  ),
+                  Divider(
+                    color: PRIMARY_COLOR,
+                  ),
+                  Text(
+                    "Favorite Sermons",
+                    style: Theme.of(context)
+                        .textTheme
+                        .bodyText2!
+                        .copyWith(fontSize: 20),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(
+                        "lorem ipsum lorem ipsum lorem ipsum lorem ipsum loremlorem ipsum lorem ipsum lorem "),
+                  ),
+                  Divider(
+                    color: PRIMARY_COLOR,
+                  ),
+                  Text(
+                    "Favorite Sermons",
+                    style: Theme.of(context)
+                        .textTheme
+                        .bodyText2!
+                        .copyWith(fontSize: 20),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(
+                        "lorem ipsum lorem ipsum lorem ipsum lorem ipsum loremlorem ipsum lorem ipsum lorem "),
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text(
-                        "Location",
-                        style: Theme.of(context)
-                            .textTheme
-                            .bodyText2!
-                            .copyWith(fontSize: 20),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Text("Ghana, Tamale"),
-                      ),
-                      Divider(
-                        color: PRIMARY_COLOR,
-                      ),
-                      Text(
-                        "Bio",
-                        style: Theme.of(context)
-                            .textTheme
-                            .bodyText2!
-                            .copyWith(fontSize: 20),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Text(
-                            "lorem ipsum lorem ipsum lorem ipsum lorem ipsum loremlorem ipsum lorem ipsum lorem "),
-                      ),
-                      Divider(
-                        color: PRIMARY_COLOR,
-                      ),
-                      Text(
-                        "Favorite Sermons",
-                        style: Theme.of(context)
-                            .textTheme
-                            .bodyText2!
-                            .copyWith(fontSize: 20),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Text(
-                            "lorem ipsum lorem ipsum lorem ipsum lorem ipsum loremlorem ipsum lorem ipsum lorem "),
-                      ),
-                      Divider(
-                        color: PRIMARY_COLOR,
-                      ),
-                      Text(
-                        "Favorite Sermons",
-                        style: Theme.of(context)
-                            .textTheme
-                            .bodyText2!
-                            .copyWith(fontSize: 20),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Text(
-                            "lorem ipsum lorem ipsum lorem ipsum lorem ipsum loremlorem ipsum lorem ipsum lorem "),
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text("Privite account"),
-                          Switch(value: true, onChanged: (value) {})
-                        ],
-                      ),
-                      commonButton(
-                        butttonColor: Color(0xffFEEFE7),
-                        padding: 5,
-                        context: context,
-                        text: "Manage Accounts",
-                        textColor: Colors.white,
-                        onPressed: () {},
-                      ),
+                      Text("Privite account"),
+                      Switch(value: true, onChanged: (value) {})
                     ],
                   ),
+                  commonButton(
+                    butttonColor: Color(0xffFEEFE7),
+                    padding: 5,
+                    context: context,
+                    text: "Manage Accounts",
+                    textColor: Colors.white,
+                    onPressed: () {},
+                  ),
+                ],
+              ),
                 ),
-              )),
+              ),
             )
           ],
         ),
