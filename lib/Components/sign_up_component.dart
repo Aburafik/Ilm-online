@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:ilm_online_app/Components/commons/common_button.dart';
 import 'package:ilm_online_app/Components/text_form.dart';
 import 'package:ilm_online_app/Components/utils/color_theme.dart';
+import 'package:ilm_online_app/Components/utils/constants.dart';
+import 'package:ilm_online_app/Repository/auth_repo.dart';
+import 'package:toast/toast.dart';
 
 class SignUpComponent extends StatefulWidget {
   const SignUpComponent({
@@ -15,11 +19,19 @@ class SignUpComponent extends StatefulWidget {
 class _SignUpComponentState extends State<SignUpComponent> {
   final formKey = GlobalKey<FormState>();
 
-  TextEditingController _emailController = TextEditingController();
-  TextEditingController _passwordController = TextEditingController();
-  TextEditingController _confirmPasswordController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _confirmPasswordController =
+      TextEditingController();
+
+  final AuthUser _authUser = AuthUser();
+  RegExp exp = RegExp(
+      r"^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$",
+      caseSensitive: false);
+
   @override
   Widget build(BuildContext context) {
+    ToastContext().init(context);
     SizedBox maxSpacer = SizedBox(
       height: MediaQuery.of(context).size.height * 0.1,
     );
@@ -71,9 +83,20 @@ class _SignUpComponentState extends State<SignUpComponent> {
               context: context,
               text: "Sign Up",
               textColor: Colors.white,
-              onPressed: () {
+              onPressed: () async {
                 if (formKey.currentState!.validate()) {
-                  Navigator.pushNamed(context, '/Home-Decide-Screen');
+                  if (!exp.hasMatch(_emailController.text)) {
+                    Toast.show("Invalid Email", duration: 2, gravity: 2);
+                    return;
+                  }
+
+                  startLoading();
+                  await _authUser.signUpUser(
+                    context: context,
+                    email: _emailController.text,
+                    password: _passwordController.text,
+                  );
+                  stopLoading();
                 }
               },
             ),

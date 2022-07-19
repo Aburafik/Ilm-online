@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:ilm_online_app/Components/commons/common_button.dart';
 import 'package:ilm_online_app/Components/text_form.dart';
 import 'package:ilm_online_app/Components/utils/color_theme.dart';
+import 'package:ilm_online_app/Components/utils/constants.dart';
+import 'package:ilm_online_app/Repository/auth_repo.dart';
 
 class SignInComponent extends StatefulWidget {
   const SignInComponent({
@@ -17,6 +19,8 @@ class _SignInComponentState extends State<SignInComponent> {
 
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+  final AuthUser _authUser = AuthUser();
+
   @override
   Widget build(BuildContext context) {
     SizedBox miniSpacer = SizedBox(
@@ -62,9 +66,15 @@ class _SignInComponentState extends State<SignInComponent> {
               context: context,
               text: "CONTINUE",
               textColor: Colors.white,
-              onPressed: () {
+              onPressed: () async {
                 if (formKey.currentState!.validate()) {
-                  Navigator.pushNamed(context, '/Home-Screen');
+                  startLoading();
+                  await _authUser.signInUser(
+                    context: context,
+                    email: _emailController.text,
+                    password: _passwordController.text,
+                  );
+                  stopLoading();
                 }
               },
             ),
