@@ -29,7 +29,7 @@ class MyApp extends StatelessWidget {
           "/Home-Decide-Screen": (context) => const HomeDecideVC(),
           "/Sign-in-Screen": (context) => const SignInVC(),
           "/Sign-up-Screen": (context) => const SignUpVC(),
-          "/Home-Screen": (context) => const HomeVC(),
+          "/Home-Screen": (context) => HomeVC(),
           "/Profile-Screen": (context) => const ProfileVC(),
         });
   }
