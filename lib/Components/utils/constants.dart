@@ -27,7 +27,7 @@ showToastMessage({String? msg}) {
 
 startLoading() {
   return EasyLoading.show(
-    status: "Signing Up...",
+    // status: "Signing Up...",
     maskType: EasyLoadingMaskType.black,
   );
 }
