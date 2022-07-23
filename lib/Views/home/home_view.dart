@@ -12,12 +12,12 @@ import 'package:ilm_online_app/providers/user_provider.dart';
 import 'package:provider/provider.dart';
 
 class HomeVC extends StatelessWidget {
-  List<Widget> pages = const [
-    HomeCategoryVC(),
-    DiscoverVC(),
-    DonateVC(),
+  List<Widget> pages = [
+    const HomeCategoryVC(),
+    const DiscoverVC(),
+    const DonateVC(),
     ProfileVC(),
-    QuestionsAndAnswersVC()
+    const QuestionsAndAnswersVC()
   ];
 
   HomeVC({Key? key}) : super(key: key);

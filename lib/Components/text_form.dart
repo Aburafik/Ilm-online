@@ -30,3 +30,35 @@ class TextFormFieldComponent extends StatelessWidget {
     );
   }
 }
+
+class ProfileViewTextFormFieldComponent extends StatelessWidget {
+  ProfileViewTextFormFieldComponent(
+      {Key? key, this.labelText, this.textEditingController})
+      : super(key: key);
+  TextEditingController? textEditingController;
+  String? labelText = "";
+  @override
+  Widget build(BuildContext context) {
+    return TextFormField(
+      controller: textEditingController,
+      validator: (value) {
+        if (value!.isEmpty) {
+          return "Please $labelText is required";
+        }
+        return null;
+      },
+      decoration: InputDecoration(
+        contentPadding: EdgeInsets.symmetric(vertical: 5,horizontal: 5),
+        labelText: labelText,
+        filled: true,
+        fillColor: LIGHT_YELLOW_COLOR,
+        // hintStyle: TextStyle(color: Colors.white),
+        enabledBorder: const OutlineInputBorder(borderSide: BorderSide.none),
+        focusedBorder: const OutlineInputBorder(borderSide: BorderSide.none),
+        errorBorder: const OutlineInputBorder(borderSide: BorderSide.none),
+        focusedErrorBorder:
+            const OutlineInputBorder(borderSide: BorderSide.none),
+      ),
+    );
+  }
+}
