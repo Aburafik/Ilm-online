@@ -20,9 +20,8 @@ class _SignUpComponentState extends State<SignUpComponent> {
 
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _nameController = TextEditingController();
+  final TextEditingController _phoneNumberController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-  final TextEditingController _confirmPasswordController =
-      TextEditingController();
 
   final AuthUser _authUser = AuthUser();
   RegExp exp = RegExp(
@@ -71,16 +70,17 @@ class _SignUpComponentState extends State<SignUpComponent> {
               TextFormFieldComponent(
                 labelText: "Email",
                 textEditingController: _emailController,
+                textInputType: TextInputType.emailAddress,
               ),
+              miniSpacer,
+              TextFormFieldComponent(
+                  labelText: "phone number",
+                  textEditingController: _phoneNumberController,
+                  textInputType: TextInputType.phone),
               miniSpacer,
               TextFormFieldComponent(
                 labelText: "Password",
                 textEditingController: _passwordController,
-              ),
-              miniSpacer,
-              TextFormFieldComponent(
-                labelText: "Confirm Password",
-                textEditingController: _confirmPasswordController,
               ),
               miniSpacer,
               commonButton(
@@ -99,7 +99,7 @@ class _SignUpComponentState extends State<SignUpComponent> {
                     await _authUser.signUpUser(
                       context: context,
                       email: _emailController.text,
-                      password: _passwordController.text,
+                      password: _phoneNumberController.text,
                       fullName: _nameController.text,
                     );
                     stopLoading();

@@ -3,6 +3,8 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:ilm_online_app/Components/utils/color_theme.dart';
 import 'package:ilm_online_app/Views/authentication/sign_in_view.dart';
 import 'package:ilm_online_app/Views/authentication/sign_up_view.dart';
+import 'package:ilm_online_app/Views/discover/hadith_details_view.dart';
+import 'package:ilm_online_app/Views/home/HomeCategories/videos_details.dart';
 import 'package:ilm_online_app/Views/home/home_decide.dart';
 import 'package:ilm_online_app/Views/home/home_view.dart';
 import 'package:ilm_online_app/Views/introScreen/splash_screen.dart';
@@ -31,8 +33,8 @@ class MyApp extends StatelessWidget {
           "/Sign-up-Screen": (context) => const SignUpVC(),
           "/Home-Screen": (context) => HomeVC(),
           "/Profile-Screen": (context) => ProfileVC(),
+          "/hadith-details": (context) => HadithDetailsView(),
+          "/video-player-view": (context) => VideoPlayerView(),
         });
   }
 }
-
-

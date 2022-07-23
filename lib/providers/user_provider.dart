@@ -3,9 +3,18 @@ import 'package:flutter/material.dart';
 class UserProvider with ChangeNotifier {
   String? _userID;
   String? _userName;
+  int _getItemCountFromDb=0;
+
+  int get getItemCountFromDb => _getItemCountFromDb;
+
 
   String get userID => _userID!;
   String get userName => _userName!;
+
+    setItemCountFromDB(int count){
+        _getItemCountFromDb=count;
+    }
+
 
   setUserName(String name) {
     _userName = name;
@@ -20,9 +29,7 @@ class UserProvider with ChangeNotifier {
 
   int _selectedIndex = 0;
 
- get selectedIndex => _selectedIndex;
- 
-
+  get selectedIndex => _selectedIndex;
 
   ontap(index) {
     _selectedIndex = index;

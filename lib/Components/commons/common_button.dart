@@ -29,7 +29,7 @@ commonButton({
           ),
         ),
         child: Padding(
-          padding: EdgeInsets.symmetric(vertical: padding),
+          padding: EdgeInsets.symmetric(vertical: 7),
           child: Text(
             text!,
             style: TextStyle(color: textColor, fontSize: 16),
