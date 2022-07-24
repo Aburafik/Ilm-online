@@ -34,7 +34,9 @@ class HomeVC extends StatelessWidget {
             children: [
               IconButton(
                 icon: const Icon(FeatherIcons.bell),
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.pushNamed(context, "/notification-screen");
+                },
               ),
               notificationStatusIcon,
             ],

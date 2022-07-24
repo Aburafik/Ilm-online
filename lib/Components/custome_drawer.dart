@@ -66,11 +66,8 @@ class AppDrawer extends StatelessWidget {
               context: context,
               title: "Logout",
               icon: FeatherIcons.logOut,
-              onTap: () async {
-                Navigator.pop(context);
-                startLoading();
-                await _authUser.signOutUser(context: context);
-                stopLoading();
+              onTap: () {
+                _authUser.signOutUser(context: context);
               }),
         ],
       ),

@@ -86,6 +86,12 @@ class AuthUser {
             Provider.of<UserProvider>(context, listen: false);
         userProvider.setUserID(value.user!.uid);
         Navigator.pushNamed(context, '/Home-Screen');
+      }).timeout(Duration(seconds: 60), onTimeout: () {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('Time out, please check your internet connection.'),
+          ),
+        );
       });
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
@@ -107,7 +113,13 @@ class AuthUser {
   ////SignOut User
   signOutUser({BuildContext? context}) async {
     await _auth.signOut().then((value) {
-      Navigator.pushNamed(context!, "/Sign-in-Screen");
+      startLoading();
+      Future.delayed(Duration(seconds: 4), () {
+        stopLoading();
+
+        Navigator.pushReplacementNamed(
+            context!, "/Sign-in-Screen",);
+      });
     });
   }
 

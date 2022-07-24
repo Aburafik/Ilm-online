@@ -8,6 +8,7 @@ import 'package:ilm_online_app/Views/home/HomeCategories/videos_details.dart';
 import 'package:ilm_online_app/Views/home/home_decide.dart';
 import 'package:ilm_online_app/Views/home/home_view.dart';
 import 'package:ilm_online_app/Views/introScreen/splash_screen.dart';
+import 'package:ilm_online_app/Views/notifications/notification_view.dart';
 import 'package:ilm_online_app/Views/profile/profile_view.dart';
 
 class MyApp extends StatelessWidget {
@@ -33,8 +34,9 @@ class MyApp extends StatelessWidget {
           "/Sign-up-Screen": (context) => const SignUpVC(),
           "/Home-Screen": (context) => HomeVC(),
           "/Profile-Screen": (context) => ProfileVC(),
-          "/hadith-details": (context) => HadithDetailsView(),
-          "/video-player-view": (context) => VideoPlayerView(),
+          "/hadith-details": (context) =>const HadithDetailsView(),
+          "/video-player-view": (context) =>const VideoPlayerView(),
+          "/notification-screen": (context) =>const NotificationsVC(),
         });
   }
 }

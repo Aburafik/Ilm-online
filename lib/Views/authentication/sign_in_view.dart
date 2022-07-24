@@ -18,7 +18,13 @@ class SignInVC extends StatelessWidget {
               alignment: Alignment.centerLeft,
               child: IconButton(
                 onPressed: () {
-                  Navigator.pop(context);
+                  //        Navigator.pushNamedAndRemoveUntil(
+                  // context, "/Home-Decide-Screen", (route) => false);
+                  Navigator.pushReplacementNamed(
+                    context,
+                    "/Home-Decide-Screen",
+                  );
+                  // Navigator.pop(context);
                 },
                 icon: Icon(Icons.arrow_back_ios),
               ),
