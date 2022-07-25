@@ -1,30 +1,61 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_feather_icons/flutter_feather_icons.dart';
 import 'package:ilm_online_app/Components/utils/color_theme.dart';
 
-class NotificationsVC extends StatelessWidget {
+class NotificationsVC extends StatefulWidget {
   const NotificationsVC({Key? key}) : super(key: key);
 
+  @override
+  State<NotificationsVC> createState() => _NotificationsVCState();
+}
+
+class _NotificationsVCState extends State<NotificationsVC> {
+  // Stream<DocumentSnapshot> db =
+  //     FirebaseFirestore.instance.collection('notifications').doc().get().snapshots();
+  Future<QuerySnapshot<Map<String, dynamic>>> db =
+      FirebaseFirestore.instance.collection('notifications').get();
+       final Stream<QuerySnapshot> _usersStream = FirebaseFirestore.instance.collection('notifications').snapshots();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(),
-      body: ListView.separated(
-          padding: const EdgeInsets.symmetric(horizontal: 20),
-          itemBuilder: (context, index) => const NotificationCard(),
-          separatorBuilder: (context, index) => const SizedBox(
-                height: 5,
-              ),
-          itemCount: 10),
+      body: StreamBuilder<QuerySnapshot>(
+          stream: _usersStream,
+          builder: (context, snapshot) {
+            if (snapshot.hasData) {
+              print(snapshot.data);
+              return ListView.separated(
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  itemBuilder: (context, index) {
+
+                    final data = snapshot.data!.docs[index].data();
+
+                    print(data);
+                    // Map<String, dynamic> data = snapshot.data()! as Map<String, dynamic>;
+                    // final data = snapshot.data![index];
+                    // final data = snapshot.data.[index].data();
+                    return NotificationCard(notifications: data ,);
+                  },
+                  separatorBuilder: (context, index) => const SizedBox(
+                        height: 5,
+                      ),
+                  itemCount: snapshot.data!.docs.length);
+            }
+            return Center(
+              child: Text("Please wait..."),
+            );
+          }),
     );
   }
 }
 
 class NotificationCard extends StatelessWidget {
-  const NotificationCard({
-    Key? key,
+  NotificationCard({
+    Key? key,this.notifications
   }) : super(key: key);
 
+  final notifications;
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -49,13 +80,12 @@ class NotificationCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "What is New!",
+                      "${notifications!['title']}",
                       style: Theme.of(context).textTheme.bodyText1,
                     ),
                     Padding(
                       padding: const EdgeInsets.symmetric(vertical: 8),
-                      child: Text(
-                          "sdjhfkfkkjfsfkdfsdfgdgsdfggfdgfdgfdgbkbfksbfbdsfbfbdbfjdj",
+                      child: Text("${notifications!['description']}",
                           style: Theme.of(context)
                               .textTheme
                               .headline2!
