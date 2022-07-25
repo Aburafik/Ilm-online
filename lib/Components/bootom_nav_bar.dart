@@ -22,7 +22,7 @@ class BottomNavBarComponent extends StatelessWidget {
       items: const [
         BottomNavigationBarItem(icon: Icon(FeatherIcons.home), label: 'Home'),
         BottomNavigationBarItem(
-            icon: Icon(FeatherIcons.search), label: 'Discover'),
+            icon: Icon(FeatherIcons.bookOpen), label: 'Hadiths'),
         BottomNavigationBarItem(
             icon: Icon(FeatherIcons.heart), label: 'Donate'),
         BottomNavigationBarItem(

@@ -9,6 +9,13 @@ Positioned notificationStatusIcon = Positioned(
   child: circleDot()
 );
 
+
+Positioned notificationStatusCount = Positioned(
+  top: 10,
+  right: 14,
+  child: circleDot()
+);
+
 Padding sermonCategoryTitle() {
   return const Padding(
     padding: EdgeInsets.symmetric(vertical: 20),

@@ -3,18 +3,16 @@ import 'package:flutter/material.dart';
 class UserProvider with ChangeNotifier {
   String? _userID;
   String? _userName;
-  int _getItemCountFromDb=0;
-
-  int get getItemCountFromDb => _getItemCountFromDb;
-
+  int _notificationCount = 0;
 
   String get userID => _userID!;
   String get userName => _userName!;
+  int get notificationCount => _notificationCount;
 
-    setItemCountFromDB(int count){
-        _getItemCountFromDb=count;
-    }
-
+  setNotificationsCountFromDB({int? count}) {
+    _notificationCount = count!;
+    notifyListeners();
+  }
 
   setUserName(String name) {
     _userName = name;
