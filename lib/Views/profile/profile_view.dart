@@ -2,15 +2,40 @@ import 'package:flutter/material.dart';
 import 'package:ilm_online_app/Components/commons/common_button.dart';
 import 'package:ilm_online_app/Components/text_form.dart';
 import 'package:ilm_online_app/Components/utils/color_theme.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-class ProfileVC extends StatelessWidget {
+class ProfileVC extends StatefulWidget {
   ProfileVC({Key? key}) : super(key: key);
 
-  TextEditingController emailController =
-      TextEditingController(text: "rafik@gmail.com");
-  TextEditingController phoneController =
-      TextEditingController(text: "0123456789");
-  TextEditingController nameController = TextEditingController(text: "Rafik");
+  @override
+  State<ProfileVC> createState() => _ProfileVCState();
+}
+
+class _ProfileVCState extends State<ProfileVC> {
+  TextEditingController emailController = TextEditingController();
+
+  TextEditingController phoneController = TextEditingController();
+
+  TextEditingController nameController = TextEditingController();
+  getUserInfor() async {
+    final pref = await SharedPreferences.getInstance();
+
+    // final value = pref.getStringList('UserProfile');
+    setState(() {
+      // print(value);
+      emailController.text = pref.getString('email')!;
+      phoneController.text = pref.getString('contact')!;
+      nameController.text = pref.getString('name')!;
+    });
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    getUserInfor();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -47,7 +72,7 @@ class ProfileVC extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Text(
-                  "Citizen Raf",
+                  nameController.text,
                   style: Theme.of(context)
                       .textTheme
                       .bodyText1!

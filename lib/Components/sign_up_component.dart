@@ -99,7 +99,8 @@ class _SignUpComponentState extends State<SignUpComponent> {
                     await _authUser.signUpUser(
                       context: context,
                       email: _emailController.text,
-                      password: _phoneNumberController.text,
+                      contact: _phoneNumberController.text,
+                      password: _passwordController.text,
                       fullName: _nameController.text,
                     );
                     stopLoading();

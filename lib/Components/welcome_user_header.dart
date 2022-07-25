@@ -20,7 +20,21 @@ class _WelcomeUserComponentState extends State<WelcomeUserComponent> {
     docRef.get().then(
       (DocumentSnapshot doc) {
         final data = doc.data() as Map<String, dynamic>;
+
+        print(data);
         setState(() => userName = data['full_name']);
+           prefs.setString('name', data['full_name']);
+           prefs.setString('email', data['email']);
+           prefs.setString('contact', data['contact']);
+           
+
+        // prefs.setStringList("UserProfile", [
+        //   data['full_name'],
+        //   data['email'],
+        //   data['phone_number'],
+        //   // data['id'],
+        //   // data['image_url'],
+        // ]);
       },
       onError: (e) => print("Error getting document: $e"),
     );

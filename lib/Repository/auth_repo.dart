@@ -14,6 +14,7 @@ class AuthUser {
   Future<void> addUser(
       {String? email,
       String? fullName,
+      String? contact,
       BuildContext? context,
       String? id}) async {
     final pref = await SharedPreferences.getInstance();
@@ -21,6 +22,7 @@ class AuthUser {
     return users.doc(id).set({
       'full_name': fullName,
       'email': email,
+      'contact': contact,
       'created_at': DateTime.now(),
     }).then((value) {
       Navigator.pushNamed(context!, '/Home-Screen');
@@ -30,7 +32,11 @@ class AuthUser {
 ////SignUp User
 
   signUpUser(
-      {String? email, String? password, String? fullName, context}) async {
+      {String? email,
+      String? password,
+      String? fullName,
+      context,
+      String? contact}) async {
     try {
       await _auth
           .createUserWithEmailAndPassword(
@@ -42,6 +48,7 @@ class AuthUser {
             email: email,
             fullName: fullName,
             context: context,
+            contact: contact,
             id: value.user!.uid);
 
         UserProvider userProvider =
@@ -118,41 +125,15 @@ class AuthUser {
         stopLoading();
 
         Navigator.pushReplacementNamed(
-            context!, "/Sign-in-Screen",);
+          context!,
+          "/Sign-in-Screen",
+        );
       });
     });
   }
 
-////getUserData
 
-// getUserInfor(){
-//   final prefs = await SharedPreferences.getInstance();
-//   return users.doc(prefs.getString('Id')).get();
-// }
-
-  // users.doc(documentId).get()
-  // .then((value) {
-  //   print(value.data());
-  //   return value;
-
-  // FutureBuilder<DocumentSnapshot>(
-  //   future: users.doc(documentId).get(),
-  //   builder: (BuildContext context, AsyncSnapshot<DocumentSnapshot> snapshot) {
-  //     if (snapshot.hasError) {
-  //       return Text("Something went wrong");
-  //     }
-
-  //     if (snapshot.hasData && !snapshot.data!.exists) {
-  //       return Text("Document does not exist");
-  //     }
-
-  //     if (snapshot.connectionState == ConnectionState.done) {
-  //       Map<String, dynamic> data =
-  //           snapshot.data!.data() as Map<String, dynamic>;
-  //       return Text("Full Name: ${data['full_name']} ${data['last_name']}");
-  //     }
-
-  //     return Text("loading");
-  //   },
-  // );
+  ////Update User Profile
+  
+  
 }
