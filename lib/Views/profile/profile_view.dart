@@ -1,7 +1,15 @@
+import 'dart:io';
+
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:ilm_online_app/Components/commons/common_button.dart';
 import 'package:ilm_online_app/Components/text_form.dart';
 import 'package:ilm_online_app/Components/utils/color_theme.dart';
+import 'package:ilm_online_app/Repository/auth_repo.dart';
+import 'package:ilm_online_app/providers/user_provider.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:permission_handler/permission_handler.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ProfileVC extends StatefulWidget {
@@ -12,6 +20,41 @@ class ProfileVC extends StatefulWidget {
 }
 
 class _ProfileVCState extends State<ProfileVC> {
+  String? imageUrl;
+  uploadImage() async {
+    final firebaseStorage = FirebaseStorage.instance;
+    final imagePicker = ImagePicker();
+    XFile? image;
+// Check Permissions
+    await Permission.photos.request();
+
+    var permissionStatus = await Permission.photos.status;
+
+    if (permissionStatus.isGranted) {
+      image = await imagePicker.pickImage(source: ImageSource.gallery);
+// getImage(source: ImageSource.gallery);
+      var file = File(image!.path);
+      if (image != null) {
+//Upload to Firebase
+        var snapshot = await firebaseStorage
+            .ref()
+            .child('images/imageName')
+            .putFile(file)
+            .whenComplete(() => null);
+        // .onComplete;
+        var downloadUrl = await snapshot.ref.getDownloadURL();
+        setState(() {
+          imageUrl = downloadUrl;
+        });
+      } else {
+        print('No Image Path Received');
+      }
+    } else {
+      print('Permission not granted. Try Again with permission access');
+    }
+  }
+
+  final AuthUser _authUser = AuthUser();
   TextEditingController emailController = TextEditingController();
 
   TextEditingController phoneController = TextEditingController();
@@ -38,6 +81,7 @@ class _ProfileVCState extends State<ProfileVC> {
 
   @override
   Widget build(BuildContext context) {
+    UserProvider userProvider = Provider.of<UserProvider>(context);
     return Scaffold(
       body: Center(
         child: Padding(
@@ -47,7 +91,7 @@ class _ProfileVCState extends State<ProfileVC> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Stack(
-                children: const [
+                children: [
                   CircleAvatar(
                     backgroundImage: NetworkImage(
                         "https://images.unsplash.com/photo-1609010697446-11f2155278f0?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTZ8fHByb2ZpbGUlMjBwaG90b3xlbnwwfHwwfHw%3D&auto=format&fit=crop&w=800&q=60"),
@@ -57,13 +101,18 @@ class _ProfileVCState extends State<ProfileVC> {
                   Positioned(
                     bottom: 10,
                     right: 0,
-                    child: CircleAvatar(
-                      radius: 15,
-                      backgroundColor: Color(0xff3C71FF),
-                      child: Icon(
-                        Icons.photo,
-                        color: Colors.white,
-                        size: 15,
+                    child: GestureDetector(
+                      onTap: (() {
+                        uploadImage();
+                      }),
+                      child: CircleAvatar(
+                        radius: 15,
+                        backgroundColor: Color(0xff3C71FF),
+                        child: Icon(
+                          Icons.photo,
+                          color: Colors.white,
+                          size: 15,
+                        ),
                       ),
                     ),
                   ),
@@ -96,7 +145,13 @@ class _ProfileVCState extends State<ProfileVC> {
                 context: context,
                 text: "Update",
                 textColor: Colors.white,
-                onPressed: () {},
+                onPressed: () async {
+                  await _authUser.upDateUser(
+                    id: userProvider.userID,
+                      context: context,
+                      fullName: nameController.text,
+                      contact: phoneController.text);
+                },
               )
             ],
           ),

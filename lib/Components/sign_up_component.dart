@@ -23,6 +23,11 @@ class _SignUpComponentState extends State<SignUpComponent> {
   final TextEditingController _phoneNumberController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
+  FocusNode _emailFocusNode = FocusNode();
+  FocusNode _nameFocusNode = FocusNode();
+  FocusNode _phoneNumberFocusNode = FocusNode();
+  FocusNode _passwordFocusNode = FocusNode();
+
   final AuthUser _authUser = AuthUser();
   RegExp exp = RegExp(
       r"^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$",
@@ -63,22 +68,29 @@ class _SignUpComponentState extends State<SignUpComponent> {
               ),
               miniSpacer,
               TextFormFieldComponent(
+                focusNode: _nameFocusNode,
+                nextfocusNode: _emailFocusNode,
                 labelText: "Full Name",
                 textEditingController: _nameController,
               ),
               miniSpacer,
               TextFormFieldComponent(
+                focusNode: _emailFocusNode,
+                nextfocusNode: _phoneNumberFocusNode,
                 labelText: "Email",
                 textEditingController: _emailController,
                 textInputType: TextInputType.emailAddress,
               ),
               miniSpacer,
               TextFormFieldComponent(
+                focusNode: _phoneNumberFocusNode,
+                nextfocusNode: _passwordFocusNode,
                   labelText: "phone number",
                   textEditingController: _phoneNumberController,
                   textInputType: TextInputType.phone),
               miniSpacer,
               TextFormFieldComponent(
+                focusNode: _passwordFocusNode,
                 labelText: "Password",
                 textEditingController: _passwordController,
               ),

@@ -14,14 +14,11 @@ class HomeDecideVC extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 20),
         child: Center(
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              SizedBox(
-                height: MediaQuery.of(context).size.height / 3,
-              ),
+              Container(),
               const AppLogoDescriptionComponent(),
-              SizedBox(
-                height: MediaQuery.of(context).size.height / 5,
-              ),
+              Container(),
               const UserActionComponent()
             ],
           ),

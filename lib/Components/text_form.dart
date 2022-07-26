@@ -7,14 +7,24 @@ class TextFormFieldComponent extends StatelessWidget {
     this.labelText,
     this.textEditingController,
     this.textInputType,
+    this.focusNode,
+    this.nextfocusNode
   }) : super(key: key);
   TextEditingController? textEditingController;
   String? labelText = "";
-
+  FocusNode? focusNode=FocusNode();
+  FocusNode? nextfocusNode=FocusNode();
   TextInputType? textInputType = TextInputType.text;
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      focusNode: focusNode,
+      onEditingComplete: () {
+        focusNode!.unfocus();
+        // FocusNode(context).unfocus();
+        // FocusScope.of(nextfocusNode);
+        FocusScope.of(context).requestFocus(nextfocusNode);
+      },
       keyboardType: textInputType,
       controller: textEditingController,
       validator: (value) {

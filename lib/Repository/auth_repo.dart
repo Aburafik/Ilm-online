@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:ilm_online_app/Components/utils/constants.dart';
 import 'package:ilm_online_app/providers/user_provider.dart';
 import 'package:provider/provider.dart';
@@ -55,28 +56,18 @@ class AuthUser {
             Provider.of<UserProvider>(context, listen: false);
         userProvider.setUserID(value.user!.uid);
 
-        showToastMessage(msg: "Sign in Successful");
+        showToast(msg: "Sign in Successful");
       }).timeout(const Duration(seconds: 60), onTimeout: () {});
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text('The password provided is too weak.'),
-          ),
-        );
+        showToast(msg: "The password provided is too weak.", color: Colors.red);
       } else if (e.code == 'email-already-in-use') {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text('The account already exists for that email.'),
-          ),
-        );
+        showToast(
+            msg: "An account already exists for that email.",
+            color: Colors.red);
       }
     } catch (e) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text('${e.toString()}.'),
-        ),
-      );
+      showToast(msg: "${e.toString()}", color: Colors.red);
     }
   }
 
@@ -93,47 +84,67 @@ class AuthUser {
             Provider.of<UserProvider>(context, listen: false);
         userProvider.setUserID(value.user!.uid);
         Navigator.pushNamed(context, '/Home-Screen');
-      }).timeout(Duration(seconds: 60), onTimeout: () {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text('Time out, please check your internet connection.'),
-          ),
-        );
+      }).timeout(const Duration(seconds: 60), onTimeout: () {
+        showToast(
+            msg: "Time out, please check your internet connection.",
+            color: Colors.red);
       });
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text('No user found for that email.'),
-          ),
-        );
+        showToast(msg: "No user found for that email.", color: Colors.red);
       } else if (e.code == 'wrong-password') {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text('Wrong password provided for that email.'),
-          ),
-        );
+        showToast(
+            msg: 'Wrong password provided for that email.', color: Colors.red);
       }
     }
   }
 
   ////SignOut User
   signOutUser({BuildContext? context}) async {
-    await _auth.signOut().then((value) {
-      startLoading();
-      Future.delayed(Duration(seconds: 4), () {
-        stopLoading();
+    await _auth.signOut().then(
+      (value) {
+        startLoading();
+        Future.delayed(
+          const Duration(seconds: 4),
+          () {
+            stopLoading();
 
-        Navigator.pushReplacementNamed(
-          context!,
-          "/Sign-in-Screen",
+            Navigator.pushReplacementNamed(
+              context!,
+              "/Sign-in-Screen",
+            );
+          },
         );
-      });
-    });
+      },
+    );
   }
 
-
   ////Update User Profile
-  
-  
+  Future<void> upDateUser(
+      {String? fullName,
+      String? contact,
+      BuildContext? context,
+      String? id}) async {
+    startLoading();
+    final pref = await SharedPreferences.getInstance();
+    pref.setString('Id', id!);
+    return users.doc(id).set({
+      'full_name': fullName,
+      'contact': contact,
+    }, SetOptions(merge: true)).then((value) {
+      stopLoading();
+      showToast(msg: "Profile Updated Successfully");
+    });
+  }
+  // uploadImage
+
+}
+
+showToast({String? msg, Color? color}) {
+  return Fluttertoast.showToast(
+      msg: msg!,
+      gravity: ToastGravity.TOP,
+      backgroundColor: color ?? Colors.green,
+      // textColor: Colors.white,
+      fontSize: 16.0);
 }

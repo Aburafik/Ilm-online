@@ -12,16 +12,16 @@ class SignUpVC extends StatelessWidget {
       body: Column(
         children: [
           SizedBox(
+            height: MediaQuery.of(context).size.height * 0.2,
             child: Align(
               alignment: Alignment.centerLeft,
               child: IconButton(
                 onPressed: () {
                   Navigator.pop(context);
                 },
-                icon: Icon(Icons.arrow_back_ios),
+                icon: const Icon(Icons.arrow_back_ios),
               ),
             ),
-            height: MediaQuery.of(context).size.height * 0.2,
           ),
           SignUpComponent(
             key: key,
