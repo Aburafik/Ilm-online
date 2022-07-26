@@ -18,8 +18,6 @@ class AuthUser {
       String? contact,
       BuildContext? context,
       String? id}) async {
-    final pref = await SharedPreferences.getInstance();
-    pref.setString('Id', id!);
     return users.doc(id).set({
       'full_name': fullName,
       'email': email,
@@ -38,6 +36,8 @@ class AuthUser {
       String? fullName,
       context,
       String? contact}) async {
+final pref= await SharedPreferences.getInstance();
+
     try {
       await _auth
           .createUserWithEmailAndPassword(
@@ -51,7 +51,8 @@ class AuthUser {
             context: context,
             contact: contact,
             id: value.user!.uid);
-
+               
+           pref.setString('user_id', value.user!.uid);
         UserProvider userProvider =
             Provider.of<UserProvider>(context, listen: false);
         userProvider.setUserID(value.user!.uid);
@@ -67,7 +68,7 @@ class AuthUser {
             color: Colors.red);
       }
     } catch (e) {
-      showToast(msg: "${e.toString()}", color: Colors.red);
+      showToast(msg: e.toString(), color: Colors.red);
     }
   }
 

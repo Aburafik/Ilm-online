@@ -12,8 +12,9 @@ import 'package:ilm_online_app/Views/notifications/notification_view.dart';
 import 'package:ilm_online_app/Views/profile/profile_view.dart';
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
-
+   MyApp({Key? key,this.userID}) : super(key: key);
+   
+   String? userID;
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
@@ -28,7 +29,7 @@ class MyApp extends StatelessWidget {
                 backgroundColor: Theme.of(context).scaffoldBackgroundColor)),
         initialRoute: "/",
         routes: {
-          "/": (context) => const SplashScreenVC(),
+          "/": (context) =>userID==null? const SplashScreenVC():HomeVC(),
           "/Home-Decide-Screen": (context) => const HomeDecideVC(),
           "/Sign-in-Screen": (context) => const SignInVC(),
           "/Sign-up-Screen": (context) => const SignUpVC(),

@@ -4,13 +4,60 @@ import 'package:flutter_feather_icons/flutter_feather_icons.dart';
 import 'package:ilm_online_app/Components/utils/color_theme.dart';
 import 'package:ilm_online_app/Views/home/HomeCategories/sermons_view.dart';
 import 'package:ilm_online_app/Views/home/HomeCategories/videos_details.dart';
+import 'package:ilm_online_app/providers/user_provider.dart';
+import 'package:provider/provider.dart';
 import 'package:scroll_navigation/scroll_navigation.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-class HomeCategoryVC extends StatelessWidget {
+class HomeCategoryVC extends StatefulWidget {
   const HomeCategoryVC({Key? key}) : super(key: key);
 
   @override
+  State<HomeCategoryVC> createState() => _HomeCategoryVCState();
+}
+
+class _HomeCategoryVCState extends State<HomeCategoryVC> {
+  String? userName;
+  CollectionReference db = FirebaseFirestore.instance.collection('users');
+  getUser(context) async {
+    final prefs = await SharedPreferences.getInstance();
+
+    final docRef = db.doc(prefs.getString('Id'));
+    docRef.get().then(
+      (DocumentSnapshot doc) {
+        final data = doc.data() as Map<String, dynamic>;
+
+        print(data);
+        setState(() => userName = data['full_name']);
+        prefs.setString('name', data['full_name']);
+        prefs.setString('email', data['email']);
+        prefs.setString('contact', data['contact']);
+
+        UserProvider userProvider = Provider.of(context, listen: false);
+        userProvider.setUserName(userName!);
+
+        // prefs.setStringList("UserProfile", [
+        //   data['full_name'],
+        //   data['email'],
+        //   data['phone_number'],
+        //   // data['id'],
+        //   // data['image_url'],
+        // ]);
+      },
+      onError: (e) => print("Error getting document: $e"),
+    );
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
+    getUser(context);
+
     return Scaffold(
       body: SafeArea(
         child: TitleScrollNavigation(
@@ -30,8 +77,8 @@ class HomeCategoryVC extends StatelessWidget {
             "SERMONS",
             "VIDEOS",
           ],
-          pages: const [
-            SermonVC(),
+          pages: [
+            const SermonVC(),
 
             ArticlesVC()
             // SamplePlayer()
@@ -42,16 +89,18 @@ class HomeCategoryVC extends StatelessWidget {
   }
 }
 
-class ArticlesVC extends StatefulWidget {
-  const ArticlesVC({Key? key}) : super(key: key);
+// class ArticlesVC extends StatefulWidget {
+//   const ArticlesVC({Key? key}) : super(key: key);
 
-  @override
-  State<ArticlesVC> createState() => _ArticlesVCState();
-}
+//   @override
+//   State<ArticlesVC> createState() => _ArticlesVCState();
+// }
 
-class _ArticlesVCState extends State<ArticlesVC> {
+class ArticlesVC extends StatelessWidget {
   Future<QuerySnapshot<Map<String, dynamic>>> db =
       FirebaseFirestore.instance.collection('videos').get();
+
+  ArticlesVC({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

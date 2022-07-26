@@ -21,7 +21,7 @@ class UserProvider with ChangeNotifier {
   }
 
   setUserID(String? id) {
-    _userID = id;
+    _userID = id!;
     notifyListeners();
   }
 

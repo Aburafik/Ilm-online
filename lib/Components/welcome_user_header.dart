@@ -1,57 +1,16 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
+// ignore_for_file: must_be_immutable
+
 import 'package:flutter/material.dart';
 import 'package:ilm_online_app/Components/utils/color_theme.dart';
-import 'package:ilm_online_app/providers/user_provider.dart';
-import 'package:provider/provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
-class WelcomeUserComponent extends StatefulWidget {
-  @override
-  State<WelcomeUserComponent> createState() => _WelcomeUserComponentState();
-}
 
-class _WelcomeUserComponentState extends State<WelcomeUserComponent> {
+class WelcomeUserComponent extends StatelessWidget {
+  WelcomeUserComponent({Key? key, this.userName}) : super(key: key);
+
   String? userName;
-  CollectionReference db = FirebaseFirestore.instance.collection('users');
-  getUser() async {
-    final prefs = await SharedPreferences.getInstance();
-
-    final docRef = db.doc(prefs.getString('Id'));
-    docRef.get().then(
-      (DocumentSnapshot doc) {
-        final data = doc.data() as Map<String, dynamic>;
-
-        print(data);
-        setState(() => userName = data['full_name']);
-           prefs.setString('name', data['full_name']);
-           prefs.setString('email', data['email']);
-           prefs.setString('contact', data['contact']);
-           
-
-        // prefs.setStringList("UserProfile", [
-        //   data['full_name'],
-        //   data['email'],
-        //   data['phone_number'],
-        //   // data['id'],
-        //   // data['image_url'],
-        // ]);
-      },
-      onError: (e) => print("Error getting document: $e"),
-    );
-  }
-
-  @override
-  void initState() {
-    getUser();
-
-    // TODO: implement initState
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
-    UserProvider userProvider =
-        Provider.of<UserProvider>(context, listen: false);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
