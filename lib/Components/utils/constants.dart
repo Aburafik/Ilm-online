@@ -3,18 +3,14 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:ilm_online_app/Components/utils/color_theme.dart';
 import 'package:toast/toast.dart';
 
-Positioned notificationStatusIcon = Positioned(
-  top: 10,
-  right: 14,
-  child: circleDot()
-);
+String mostRecentSermonImageUrl =
+    "https://images.unsplash.com/photo-1512632578888-169bbbc64f33?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTB8fGlzbGFtfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=800&q=60";
 
+Positioned notificationStatusIcon =
+    Positioned(top: 10, right: 14, child: circleDot());
 
-Positioned notificationStatusCount = Positioned(
-  top: 10,
-  right: 14,
-  child: circleDot()
-);
+Positioned notificationStatusCount =
+    Positioned(top: 10, right: 14, child: circleDot());
 
 Padding sermonCategoryTitle() {
   return const Padding(

@@ -50,13 +50,13 @@ class _HomeCategoryVCState extends State<HomeCategoryVC> {
 
   @override
   void initState() {
-    // TODO: implement initState
+  getUser(context);
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    getUser(context);
+    // getUser(context);
 
     return Scaffold(
       body: SafeArea(

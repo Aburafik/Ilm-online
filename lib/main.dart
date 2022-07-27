@@ -6,18 +6,17 @@ import 'package:ilm_online_app/providers/user_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-void main() async{
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  // final prefs = await SharedPreferences.getInstance();
+  // final userID = prefs.getString('user_id')??"";
   await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,);
-    final prefs = await SharedPreferences.getInstance();
-    final userID = prefs.getString('user_id');
-  runApp(
-    ChangeNotifierProvider(
-    create: (context) => UserProvider(),
-    
-    child:  MyApp(userID: userID,)));
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+
+  runApp(ChangeNotifierProvider(
+      create: (context) => UserProvider(),
+      child: MyApp(
+      
+      )));
 }
-
-
-

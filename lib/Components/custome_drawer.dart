@@ -1,17 +1,20 @@
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_feather_icons/flutter_feather_icons.dart';
 import 'package:ilm_online_app/Components/drawer_items_widget.dart';
 import 'package:ilm_online_app/Components/utils/color_theme.dart';
 import 'package:ilm_online_app/Components/utils/constants.dart';
 import 'package:ilm_online_app/Repository/auth_repo.dart';
+import 'package:ilm_online_app/providers/user_provider.dart';
+import 'package:provider/provider.dart';
 
+// ignore: must_be_immutable
 class AppDrawer extends StatelessWidget {
   AppDrawer({Key? key}) : super(key: key);
-  AuthUser _authUser = AuthUser();
+  AuthUser authUser = AuthUser();
   @override
   Widget build(BuildContext context) {
+    UserProvider userProvider =
+        Provider.of<UserProvider>(context, listen: true);
     return Drawer(
       elevation: 0,
       backgroundColor: BLACK_COLOR,
@@ -28,14 +31,18 @@ class AppDrawer extends StatelessWidget {
             icon: FeatherIcons.user,
             onTap: () {
               Navigator.pop(context);
+              userProvider.ontap(3);
             },
           ),
           drawerTilesWidget(
-            context: context,
-            title: "Notifications",
-            icon: FeatherIcons.bell,
-            trailing: circleDot(),
-          ),
+              context: context,
+              title: "Notifications",
+              icon: FeatherIcons.bell,
+              trailing: circleDot(),
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.pushNamed(context, "/notification-screen");
+              }),
           drawerTilesWidget(
             context: context,
             title: "Messages",
@@ -53,22 +60,17 @@ class AppDrawer extends StatelessWidget {
           ),
           drawerTilesWidget(
             context: context,
-            title: "Profile",
-            icon: FeatherIcons.user,
-            onTap: () {},
-          ),
-          drawerTilesWidget(
-            context: context,
             title: "Settings",
             icon: FeatherIcons.settings,
           ),
           drawerTilesWidget(
-              context: context,
-              title: "Logout",
-              icon: FeatherIcons.logOut,
-              onTap: () {
-                _authUser.signOutUser(context: context);
-              }),
+            context: context,
+            title: "Logout",
+            icon: FeatherIcons.logOut,
+            onTap: () {
+              authUser.signOutUser(context: context);
+            },
+          ),
         ],
       ),
     );
