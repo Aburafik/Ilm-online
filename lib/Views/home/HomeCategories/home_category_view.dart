@@ -8,6 +8,7 @@ import 'package:ilm_online_app/providers/user_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:scroll_navigation/scroll_navigation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:shimmer/shimmer.dart';
 
 class HomeCategoryVC extends StatefulWidget {
   const HomeCategoryVC({Key? key}) : super(key: key);
@@ -50,7 +51,7 @@ class _HomeCategoryVCState extends State<HomeCategoryVC> {
 
   @override
   void initState() {
-  getUser(context);
+    getUser(context);
     super.initState();
   }
 
@@ -88,13 +89,6 @@ class _HomeCategoryVCState extends State<HomeCategoryVC> {
     );
   }
 }
-
-// class ArticlesVC extends StatefulWidget {
-//   const ArticlesVC({Key? key}) : super(key: key);
-
-//   @override
-//   State<ArticlesVC> createState() => _ArticlesVCState();
-// }
 
 class ArticlesVC extends StatelessWidget {
   Future<QuerySnapshot<Map<String, dynamic>>> db =
@@ -166,9 +160,52 @@ class ArticlesVC extends StatelessWidget {
                 },
               );
             } else {
-              return const Center(
-                child: Text("Please Wait....."),
+              return ListView.builder(
+                itemBuilder: ((context, index) {
+                  return Shimmer.fromColors(
+                    baseColor: Colors.grey,
+                    highlightColor: Colors.grey,
+                    child: Row(
+                      children: [
+                        Container(
+                          margin: const EdgeInsets.all(5),
+                          height: 100,
+                          width: 100,
+                          decoration: BoxDecoration(
+                              color: PRIMARY_COLOR,
+                              borderRadius: BorderRadius.circular(10)),
+                          child: const Center(
+                            child: Icon(
+                              FeatherIcons.video,
+                              size: 30,
+                              color: LIGHT_BLACK_COLOR,
+                            ),
+                          ),
+                        ),
+                        const SizedBox(
+                          width: 3,
+                        ),
+                        Expanded(
+                          child: Text(
+                            "",
+                            style: Theme.of(context)
+                                .textTheme
+                                .headline5!
+                                .copyWith(
+                                  fontSize: 16,
+                                  color: BLACK_COLOR,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  );
+                }),
               );
+              //  const Center(
+              //   child: Text("Please Wait....."),
+              // );
             }
           },
         ),
