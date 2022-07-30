@@ -36,7 +36,7 @@ class AuthUser {
       String? fullName,
       context,
       String? contact}) async {
-final pref= await SharedPreferences.getInstance();
+    final pref = await SharedPreferences.getInstance();
 
     try {
       await _auth
@@ -51,8 +51,8 @@ final pref= await SharedPreferences.getInstance();
             context: context,
             contact: contact,
             id: value.user!.uid);
-               
-           pref.setString('user_id', value.user!.uid);
+
+        pref.setString('user_id', value.user!.uid);
         UserProvider userProvider =
             Provider.of<UserProvider>(context, listen: false);
         userProvider.setUserID(value.user!.uid);
@@ -79,11 +79,12 @@ final pref= await SharedPreferences.getInstance();
       final prefs = await SharedPreferences.getInstance();
       await FirebaseAuth.instance
           .signInWithEmailAndPassword(email: email!, password: password!)
-          .then((value) {
+          .then((value) async {
         prefs.setString('Id', value.user!.uid);
         UserProvider userProvider =
             Provider.of<UserProvider>(context, listen: false);
         userProvider.setUserID(value.user!.uid);
+        await getUser(context);
         Navigator.pushNamed(context, '/Home-Screen');
       }).timeout(const Duration(seconds: 60), onTimeout: () {
         showToast(
@@ -102,9 +103,19 @@ final pref= await SharedPreferences.getInstance();
 
   ////SignOut User
   signOutUser({BuildContext? context}) async {
+    final prefs = await SharedPreferences.getInstance();
+
     await _auth.signOut().then(
       (value) {
         startLoading();
+        prefs.remove('name');
+        prefs.remove('email');
+        prefs.remove(
+          'contact',
+        );
+        prefs.remove('profileImage');
+
+        // prefs.remove(key)
         Future.delayed(
           const Duration(seconds: 4),
           () {
@@ -124,15 +135,18 @@ final pref= await SharedPreferences.getInstance();
   Future<void> upDateUser(
       {String? fullName,
       String? contact,
+      String? imageUrl,
       BuildContext? context,
       String? id}) async {
-    startLoading();
+    // startLoading();
     final pref = await SharedPreferences.getInstance();
     pref.setString('Id', id!);
     return users.doc(id).set({
       'full_name': fullName,
       'contact': contact,
-    }, SetOptions(merge: true)).then((value) {
+      'image_url': imageUrl,
+    }, SetOptions(merge: true)).then((value) async {
+      await getUser(context);
       stopLoading();
       showToast(msg: "Profile Updated Successfully");
     });
@@ -148,4 +162,33 @@ showToast({String? msg, Color? color}) {
       backgroundColor: color ?? Colors.green,
       // textColor: Colors.white,
       fontSize: 16.0);
+}
+
+String? userName;
+CollectionReference db = FirebaseFirestore.instance.collection('users');
+getUser(context) async {
+  final prefs = await SharedPreferences.getInstance();
+  String userID = FirebaseAuth.instance.currentUser!.uid;
+
+  final docRef = db.doc(userID);
+  docRef.get().then(
+    (DocumentSnapshot doc) {
+      UserProvider userProvider = Provider.of(context, listen: false);
+
+      final data = doc.data() as Map<String, dynamic>;
+
+      print(data['full_name']);
+      userProvider.setUserData(data);
+      userProvider.setUserName(data['full_name']);
+      // prefs.setString('name', data['full_name']);
+      // prefs.setString('email', data['email']);
+      // prefs.setString('contact', data['contact']);
+      // prefs.setString('profileImage', data['image_url']);
+
+      // print(userName);
+
+      // userProvider.setUserName(userName!);
+    },
+    onError: (e) => print("Error getting document: $e"),
+  );
 }

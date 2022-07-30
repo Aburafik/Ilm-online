@@ -2,7 +2,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:ilm_online_app/Components/utils/color_theme.dart';
-
+import 'package:ilm_online_app/providers/user_provider.dart';
+import 'package:provider/provider.dart';
 
 class WelcomeUserComponent extends StatelessWidget {
   WelcomeUserComponent({Key? key, this.userName}) : super(key: key);
@@ -11,11 +12,13 @@ class WelcomeUserComponent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    UserProvider userProvider = Provider.of(context, listen: false);
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          'Hey ${userName ?? ""}',
+          'Hey ${userName ?? userProvider.userName}',
           style: const TextStyle(
               fontSize: 20, color: BLACK_COLOR, fontWeight: FontWeight.w500),
         ),

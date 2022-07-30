@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_feather_icons/flutter_feather_icons.dart';
 import 'package:ilm_online_app/Components/utils/color_theme.dart';
@@ -18,46 +19,18 @@ class HomeCategoryVC extends StatefulWidget {
 }
 
 class _HomeCategoryVCState extends State<HomeCategoryVC> {
-  String? userName;
-  CollectionReference db = FirebaseFirestore.instance.collection('users');
-  getUser(context) async {
-    final prefs = await SharedPreferences.getInstance();
-
-    final docRef = db.doc(prefs.getString('Id'));
-    docRef.get().then(
-      (DocumentSnapshot doc) {
-        final data = doc.data() as Map<String, dynamic>;
-
-        print(data);
-        setState(() => userName = data['full_name']);
-        prefs.setString('name', data['full_name']);
-        prefs.setString('email', data['email']);
-        prefs.setString('contact', data['contact']);
-
-        UserProvider userProvider = Provider.of(context, listen: false);
-        userProvider.setUserName(userName!);
-
-        // prefs.setStringList("UserProfile", [
-        //   data['full_name'],
-        //   data['email'],
-        //   data['phone_number'],
-        //   // data['id'],
-        //   // data['image_url'],
-        // ]);
-      },
-      onError: (e) => print("Error getting document: $e"),
-    );
-  }
-
+  
   @override
   void initState() {
-    getUser(context);
     super.initState();
+    // getUser(context);
   }
 
   @override
   Widget build(BuildContext context) {
+    final userProvider = Provider.of<UserProvider>(context, listen: false);
     // getUser(context);
+    // userProvider.setUserName(userName!);
 
     return Scaffold(
       body: SafeArea(
@@ -188,14 +161,12 @@ class ArticlesVC extends StatelessWidget {
                         Expanded(
                           child: Text(
                             "",
-                            style: Theme.of(context)
-                                .textTheme
-                                .headline5!
-                                .copyWith(
-                                  fontSize: 16,
-                                  color: BLACK_COLOR,
-                                  fontWeight: FontWeight.w500,
-                                ),
+                            style:
+                                Theme.of(context).textTheme.headline5!.copyWith(
+                                      fontSize: 16,
+                                      color: BLACK_COLOR,
+                                      fontWeight: FontWeight.w500,
+                                    ),
                           ),
                         ),
                       ],

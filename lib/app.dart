@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:ilm_online_app/Components/utils/color_theme.dart';
+import 'package:ilm_online_app/Repository/auth_repo.dart';
 import 'package:ilm_online_app/Views/authentication/sign_in_view.dart';
 import 'package:ilm_online_app/Views/authentication/sign_up_view.dart';
 import 'package:ilm_online_app/Views/discover/hadith_details_view.dart';
@@ -25,6 +26,7 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
+  // AuthUser _authUser=AuthUser();
   String? iD;
   isUserExist() async {
     _firebaseAuth.authStateChanges().listen(
@@ -32,6 +34,9 @@ class _MyAppState extends State<MyApp> {
         if (user != null) {
           setState(() {
             iD = user.uid;
+            
+            getUser(context);
+            
           });
         }
       },

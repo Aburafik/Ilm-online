@@ -27,56 +27,59 @@ class HomeVC extends StatelessWidget {
   Widget build(BuildContext context) {
     UserProvider userProvider =
         Provider.of<UserProvider>(context, listen: true);
-    return Scaffold(
-      drawer: AppDrawer(),
-      appBar: AppBar(
-        actions: [
-          InkWell(
-            child: Stack(
-              children: [
-                IconButton(
-                  icon: const Icon(FeatherIcons.bell),
-                  onPressed: () {
-                    Navigator.pushNamed(context, "/notification-screen");
-                  },
-                ),
-                userProvider.notificationCount == 0
-                    ? notificationStatusIcon
-                    : Positioned(
-                        top: 10,
-                        right: 14,
-                        child: Container(
-                          height: 15,
-                          width: 15,
-                          decoration: BoxDecoration(
-                            color: BLACK_COLOR,
-                            borderRadius: BorderRadius.circular(15),
-                          ),
-                          child: Center(
-                            child: Text(
-                              "${userProvider.notificationCount}",
-                              style: const TextStyle(
-                                color: Colors.red,
-                                fontSize: 10,
-                                fontWeight: FontWeight.bold,
+    return WillPopScope(
+      onWillPop: () => Future.value(false),
+      child: Scaffold(
+        drawer: AppDrawer(),
+        appBar: AppBar(
+          actions: [
+            InkWell(
+              child: Stack(
+                children: [
+                  IconButton(
+                    icon: const Icon(FeatherIcons.bell),
+                    onPressed: () {
+                      Navigator.pushNamed(context, "/notification-screen");
+                    },
+                  ),
+                  userProvider.notificationCount == 0
+                      ? notificationStatusIcon
+                      : Positioned(
+                          top: 10,
+                          right: 14,
+                          child: Container(
+                            height: 15,
+                            width: 15,
+                            decoration: BoxDecoration(
+                              color: BLACK_COLOR,
+                              borderRadius: BorderRadius.circular(15),
+                            ),
+                            child: Center(
+                              child: Text(
+                                "${userProvider.notificationCount}",
+                                style: const TextStyle(
+                                  color: Colors.red,
+                                  fontSize: 10,
+                                  fontWeight: FontWeight.bold,
+                                ),
                               ),
                             ),
                           ),
-                        ),
-                      )
-              ],
+                        )
+                ],
+              ),
+              onTap: () {
+                print("Notification tapped");
+                Navigator.pushNamed(context, "/notification-screen");
+              },
             ),
-            onTap: () {
-              print("Notification tapped");
-              Navigator.pushNamed(context, "/notification-screen");
-            },
-          ),
-        ],
-      ),
-      body: IndexedStack(index: userProvider.selectedIndex, children: pages),
-      bottomNavigationBar: BottomNavBarComponent(
-        currentIndex: userProvider.selectedIndex,
-        onTap: userProvider.ontap,
+          ],
+        ),
+        body: IndexedStack(index: userProvider.selectedIndex, children: pages),
+        bottomNavigationBar: BottomNavBarComponent(
+          currentIndex: userProvider.selectedIndex,
+          onTap: userProvider.ontap,
+        ),
       ),
     );
   }

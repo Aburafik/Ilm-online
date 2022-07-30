@@ -15,7 +15,7 @@ class SermonVC extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    UserProvider userProvider = Provider.of(context);
+    UserProvider userProvider = Provider.of(context,listen: true);
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
       child: SingleChildScrollView(
