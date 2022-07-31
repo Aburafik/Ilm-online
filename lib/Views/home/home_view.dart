@@ -17,7 +17,7 @@ class HomeVC extends StatelessWidget {
     const HomeCategoryVC(),
     const DiscoverVC(),
     const DonateVC(),
-    ProfileVC(),
+    const ProfileVC(),
     const QuestionsAndAnswersVC()
   ];
 
@@ -42,30 +42,7 @@ class HomeVC extends StatelessWidget {
                       Navigator.pushNamed(context, "/notification-screen");
                     },
                   ),
-                  userProvider.notificationCount == 0
-                      ? notificationStatusIcon
-                      : Positioned(
-                          top: 10,
-                          right: 14,
-                          child: Container(
-                            height: 15,
-                            width: 15,
-                            decoration: BoxDecoration(
-                              color: BLACK_COLOR,
-                              borderRadius: BorderRadius.circular(15),
-                            ),
-                            child: Center(
-                              child: Text(
-                                "${userProvider.notificationCount}",
-                                style: const TextStyle(
-                                  color: Colors.red,
-                                  fontSize: 10,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                            ),
-                          ),
-                        )
+                  notificationStatusIcon
                 ],
               ),
               onTap: () {

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:ilm_online_app/Components/utils/color_theme.dart';
 import 'package:toast/toast.dart';
 
@@ -15,18 +16,13 @@ Positioned notificationStatusCount =
 Padding sermonCategoryTitle() {
   return const Padding(
     padding: EdgeInsets.symmetric(vertical: 20),
-    child: Text("RECENT SERMONS",
+    child: Text("RECENT ARTICLES",
         style: TextStyle(
             fontSize: 16, fontWeight: FontWeight.bold, color: BLACK_COLOR)),
   );
 }
 
-showToastMessage({String? msg}) {
-  Toast.show(msg!,
-      duration: Toast.lengthShort,
-      gravity: Toast.top,
-      backgroundColor: Colors.green);
-}
+
 
 startLoading() {
   return EasyLoading.show(
@@ -48,4 +44,13 @@ circleDot() {
       borderRadius: BorderRadius.circular(5),
     ),
   );
+}
+
+showToast({String? msg, Color? color}) {
+  return Fluttertoast.showToast(
+      msg: msg!,
+      gravity: ToastGravity.TOP,
+      backgroundColor: color ?? Colors.green,
+      // textColor: Colors.white,
+      fontSize: 16.0);
 }

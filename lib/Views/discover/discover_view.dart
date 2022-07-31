@@ -15,7 +15,6 @@ class _DiscoverVCState extends State<DiscoverVC> {
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       body: FutureBuilder<QuerySnapshot<Map<String, dynamic>>>(
         future: db,
@@ -39,8 +38,7 @@ class _DiscoverVCState extends State<DiscoverVC> {
               },
             );
           } else {
-            print("No Data");
-            return Text("No Data");
+            return const Center(child: Text("No Data"));
           }
         },
       ),

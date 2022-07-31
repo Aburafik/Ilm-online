@@ -1,18 +1,20 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_feather_icons/flutter_feather_icons.dart';
 import 'package:ilm_online_app/Components/utils/color_theme.dart';
 
 class RecentSermonsComponent extends StatelessWidget {
-  const RecentSermonsComponent({
+  RecentSermonsComponent({
     Key? key,
   }) : super(key: key);
-
+  String imageUrl =
+      "https://images.unsplash.com/photo-1590092794015-bce5431c83f4?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTJ8fG1vc3F1ZXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=800&q=60";
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      // height: MediaQuery.of(context).size.height / 2,
       child: GridView.builder(
         shrinkWrap: true,
-        physics: NeverScrollableScrollPhysics(),
+        physics: const NeverScrollableScrollPhysics(),
         itemCount: 10,
         itemBuilder: (context, index) => Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -24,8 +26,26 @@ class RecentSermonsComponent extends StatelessWidget {
                 ),
                 width: 350,
                 decoration: BoxDecoration(
+                    image: DecorationImage(
+                      image: CachedNetworkImageProvider(
+                        imageUrl,
+                      ),
+                      fit: BoxFit.cover,
+                    ),
                     color: LIGHT_GREY_COLOR,
                     borderRadius: BorderRadius.circular(10)),
+                child: Center(
+                  child: IconButton(
+                    icon: const Icon(
+                      FeatherIcons.book,
+                      color: LIGHT_GREY_COLOR,
+                      size: 45,
+                    ),
+                    onPressed: () {
+                      print("Play");
+                    },
+                  ),
+                ),
               ),
             ),
             const Text(

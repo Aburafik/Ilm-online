@@ -23,10 +23,10 @@ class _SignUpComponentState extends State<SignUpComponent> {
   final TextEditingController _phoneNumberController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
-  FocusNode _emailFocusNode = FocusNode();
-  FocusNode _nameFocusNode = FocusNode();
-  FocusNode _phoneNumberFocusNode = FocusNode();
-  FocusNode _passwordFocusNode = FocusNode();
+  final FocusNode _emailFocusNode = FocusNode();
+  final FocusNode _nameFocusNode = FocusNode();
+  final FocusNode _phoneNumberFocusNode = FocusNode();
+  final FocusNode _passwordFocusNode = FocusNode();
 
   final AuthUser _authUser = AuthUser();
   RegExp exp = RegExp(
@@ -83,8 +83,8 @@ class _SignUpComponentState extends State<SignUpComponent> {
               ),
               miniSpacer,
               TextFormFieldComponent(
-                focusNode: _phoneNumberFocusNode,
-                nextfocusNode: _passwordFocusNode,
+                  focusNode: _phoneNumberFocusNode,
+                  nextfocusNode: _passwordFocusNode,
                   labelText: "phone number",
                   textEditingController: _phoneNumberController,
                   textInputType: TextInputType.phone),

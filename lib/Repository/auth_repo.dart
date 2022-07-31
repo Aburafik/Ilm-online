@@ -1,8 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:ilm_online_app/Components/utils/constants.dart';
+import 'package:ilm_online_app/Repository/db_repo.dart';
 import 'package:ilm_online_app/providers/user_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -51,7 +51,7 @@ class AuthUser {
             context: context,
             contact: contact,
             id: value.user!.uid);
-
+        getUser(context);
         pref.setString('user_id', value.user!.uid);
         UserProvider userProvider =
             Provider.of<UserProvider>(context, listen: false);
@@ -66,6 +66,8 @@ class AuthUser {
         showToast(
             msg: "An account already exists for that email.",
             color: Colors.red);
+      } else {
+        showToast(msg: "Something went wrong.", color: Colors.red);
       }
     } catch (e) {
       showToast(msg: e.toString(), color: Colors.red);
@@ -97,6 +99,9 @@ class AuthUser {
       } else if (e.code == 'wrong-password') {
         showToast(
             msg: 'Wrong password provided for that email.', color: Colors.red);
+      } else {
+        showToast(
+            msg: "Please check your internet connection.", color: Colors.red);
       }
     }
   }
@@ -146,49 +151,10 @@ class AuthUser {
       'contact': contact,
       'image_url': imageUrl,
     }, SetOptions(merge: true)).then((value) async {
-      await getUser(context);
       stopLoading();
       showToast(msg: "Profile Updated Successfully");
     });
   }
   // uploadImage
 
-}
-
-showToast({String? msg, Color? color}) {
-  return Fluttertoast.showToast(
-      msg: msg!,
-      gravity: ToastGravity.TOP,
-      backgroundColor: color ?? Colors.green,
-      // textColor: Colors.white,
-      fontSize: 16.0);
-}
-
-String? userName;
-CollectionReference db = FirebaseFirestore.instance.collection('users');
-getUser(context) async {
-  final prefs = await SharedPreferences.getInstance();
-  String userID = FirebaseAuth.instance.currentUser!.uid;
-
-  final docRef = db.doc(userID);
-  docRef.get().then(
-    (DocumentSnapshot doc) {
-      UserProvider userProvider = Provider.of(context, listen: false);
-
-      final data = doc.data() as Map<String, dynamic>;
-
-      print(data['full_name']);
-      userProvider.setUserData(data);
-      userProvider.setUserName(data['full_name']);
-      // prefs.setString('name', data['full_name']);
-      // prefs.setString('email', data['email']);
-      // prefs.setString('contact', data['contact']);
-      // prefs.setString('profileImage', data['image_url']);
-
-      // print(userName);
-
-      // userProvider.setUserName(userName!);
-    },
-    onError: (e) => print("Error getting document: $e"),
-  );
 }

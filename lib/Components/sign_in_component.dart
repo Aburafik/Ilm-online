@@ -19,6 +19,10 @@ class _SignInComponentState extends State<SignInComponent> {
 
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+  final FocusNode _emailFocusNode = FocusNode();
+
+  final FocusNode _passwordFocusNode = FocusNode();
+
   final AuthUser _authUser = AuthUser();
 
   @override
@@ -52,11 +56,15 @@ class _SignInComponentState extends State<SignInComponent> {
             ),
             miniSpacer,
             TextFormFieldComponent(
+              focusNode: _emailFocusNode,
+              nextfocusNode: _passwordFocusNode,
               labelText: "Email",
               textEditingController: _emailController,
             ),
             miniSpacer,
             TextFormFieldComponent(
+              isFieldObsecure: true,
+              focusNode: _passwordFocusNode,
               labelText: "Password",
               textEditingController: _passwordController,
             ),

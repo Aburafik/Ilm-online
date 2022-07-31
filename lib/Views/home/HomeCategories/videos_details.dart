@@ -19,11 +19,8 @@ class _VideoPlayerState extends State<VideoPlayerView> {
   void initState() {
     super.initState();
     flickManager = FlickManager(
-      videoPlayerController: VideoPlayerController.network(
-          "${widget.arguments!["videoUrl"]}"
-          // "https://d1.islamhouse.com/data/en/ih_videos/mp4/single/en-how-to-perform-wudu.mp4"
-
-          ),
+      videoPlayerController:
+          VideoPlayerController.network("${widget.arguments!["videoUrl"]}"),
     );
   }
 
@@ -40,8 +37,8 @@ class _VideoPlayerState extends State<VideoPlayerView> {
       appBar: AppBar(),
       body: Column(
         children: [
-          Container(
-            padding: EdgeInsets.all(10),
+          SizedBox(
+            // padding: EdgeInsets.all(10),
             height: MediaQuery.of(context).size.height / 2.5,
             child: FlickVideoPlayer(flickManager: flickManager!),
           ),
@@ -51,7 +48,7 @@ class _VideoPlayerState extends State<VideoPlayerView> {
                 Padding(
                   padding: const EdgeInsets.all(10.0),
                   child: Text(
-                    "Title: ${widget.arguments!["title"]}",
+                    "Title: ${widget.arguments!["title"].toUpperCase()}",
                     style: Theme.of(context)
                         .textTheme
                         .bodyText1!
@@ -70,14 +67,13 @@ class _VideoPlayerState extends State<VideoPlayerView> {
                           ),
                       children: [
                         TextSpan(
-                          text: "${widget.arguments!["discription"]}",
-                          style: Theme.of(context)
-                              .textTheme
-                              .headline2!
-                              .copyWith(
-                                  color: BLACK_COLOR,
-                                  fontSize: 16,
-                                  height: 1.5),
+                          text: "${widget.arguments!["description"]}",
+                          style:
+                              Theme.of(context).textTheme.headline2!.copyWith(
+                                    color: BLACK_COLOR,
+                                    fontSize: 16,
+                                    height: 1.5,
+                                  ),
                         ),
                       ],
                     ),

@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
@@ -9,6 +8,7 @@ import 'package:ilm_online_app/Components/text_form.dart';
 import 'package:ilm_online_app/Components/utils/color_theme.dart';
 import 'package:ilm_online_app/Components/utils/constants.dart';
 import 'package:ilm_online_app/Repository/auth_repo.dart';
+import 'package:ilm_online_app/Repository/db_repo.dart';
 import 'package:ilm_online_app/providers/user_provider.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
@@ -25,7 +25,7 @@ class _ProfileVCState extends State<ProfileVC> {
   File? _image;
   final _imagePicker = ImagePicker();
   String? uploadFileUrl;
-
+  bool isEditable = true;
   // String? imageUrl;
   uploadImage({BuildContext? context}) async {
     showModalBottomSheet(
@@ -118,15 +118,14 @@ class _ProfileVCState extends State<ProfileVC> {
   Widget build(BuildContext context) {
     UserProvider userProvider =
         Provider.of<UserProvider>(context, listen: true);
-    emailController.text = userProvider.userData['email'];
-    phoneController.text = userProvider.userData['contact'];
-    nameController.text = userProvider.userData['full_name'];
+    emailController.text = userProvider.userData['email']??"";
+    phoneController.text = userProvider.userData['contact']??"";
+    nameController.text = userProvider.userData['full_name']??"";
     return Scaffold(
       body: Center(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),
           child: Column(
-            // crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Stack(
@@ -173,15 +172,16 @@ class _ProfileVCState extends State<ProfileVC> {
                 ),
               ),
               ProfileViewTextFormFieldComponent(
-                // labelText: "Email",
                 textEditingController: nameController,
               ),
               ProfileViewTextFormFieldComponent(
-                // labelText: "Email",
+                isFieldEnabled: false,
+                onTap: () => showToast(
+                    color: const Color.fromRGBO(244, 67, 54, 1),
+                    msg: "This field can not be edited"),
                 textEditingController: emailController,
               ),
               ProfileViewTextFormFieldComponent(
-                // labelText: "Email",
                 textEditingController: phoneController,
               ),
               commonButton(
@@ -190,23 +190,16 @@ class _ProfileVCState extends State<ProfileVC> {
                 text: "Update",
                 textColor: Colors.white,
                 onPressed: () async {
-                  print(userID);
-                  print("...............................");
-
-                  print(emailController.text);
-                  print(nameController.text);
-                  print("...............................");
                   startLoading();
                   await uploadFile(file: _image!, userUid: userID)
                       .then((value) {
-                    print(value);
                     _authUser.upDateUser(
                         id: userID,
                         context: context,
                         imageUrl: uploadFileUrl,
                         fullName: nameController.text,
                         contact: phoneController.text);
-
+                    getUser(context);
                     stopLoading();
                   });
                 },
