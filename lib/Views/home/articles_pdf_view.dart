@@ -23,14 +23,15 @@ class _ArticlesPDfVCState extends State<ArticlesPDfVC> {
           Text('$currentPageNumber/$totalPages'),
           Expanded(
             child: PDF(
-            
-            
+              // fitPolicy: 
+              // FitPolicy.HEIGHT,
               onPageChanged: (int? page, int? total) {
                 setState(() {
                   currentPageNumber = page!;
                   totalPages = total!;
                 });
               },
+              // swipeHorizontal: true
             ).cachedFromUrl(
               widget.url!,
               placeholder: (double progress) =>
