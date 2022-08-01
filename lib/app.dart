@@ -39,6 +39,8 @@ class _MyAppState extends State<MyApp> {
             getUser(context);
             getNewSermon(context);
             getRecentSermon(context);
+            getpopularSermon(context);
+            getArticles(context);
           });
         }
       },

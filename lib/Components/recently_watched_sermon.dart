@@ -98,7 +98,7 @@ class RecentlyWatchedSermonsComponent extends StatelessWidget {
                             child: Text(
                               "${recentlyWatchedSermons[index]["title"]}",
                               overflow: TextOverflow.ellipsis,
-                              style: TextStyle(color: Colors.grey),
+                              style: const TextStyle(color: Colors.grey),
                             ),
                           )
                         ],
@@ -118,7 +118,7 @@ shimmerLaoder() {
     scrollDirection: Axis.horizontal,
     itemBuilder: (context, index) => Shimmer.fromColors(
       baseColor: Colors.grey.withOpacity(0.5),
-    highlightColor: Color.fromARGB(255, 216, 213, 213),
+    highlightColor: const Color.fromARGB(255, 216, 213, 213),
       child: Padding(
         padding: const EdgeInsets.only(right: 14),
         child: Column(
@@ -143,19 +143,19 @@ shimmerLaoder() {
                 ),
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.symmetric(
+           const Padding(
+              padding:  EdgeInsets.symmetric(
                 vertical: 3,
               ),
-              child: Text(
+              child:  Text(
                 "",
-                style: const TextStyle(
+                style: TextStyle(
                     color: BLACK_COLOR,
                     fontSize: 16,
                     fontWeight: FontWeight.w500),
               ),
             ),
-            SizedBox(
+            const SizedBox(
               width: 200,
               height: 15,
               child: Text(

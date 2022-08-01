@@ -1,7 +1,11 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_feather_icons/flutter_feather_icons.dart';
+import 'package:ilm_online_app/Components/recently_watched_sermon.dart';
 import 'package:ilm_online_app/Components/utils/color_theme.dart';
+import 'package:ilm_online_app/Views/home/HomeCategories/videos_details.dart';
+import 'package:ilm_online_app/providers/database_providers.dart';
+import 'package:provider/provider.dart';
 
 class PopularSermonsComponent extends StatelessWidget {
   PopularSermonsComponent({
@@ -12,6 +16,10 @@ class PopularSermonsComponent extends StatelessWidget {
       "https://media.istockphoto.com/photos/silhouette-of-a-big-mosque-on-blue-full-moon-in-night-background-picture-id1219894876?b=1&k=20&m=1219894876&s=170667a&w=0&h=8J1-j3WrxCbY5fhPQfKKPAQVgWxRQ8gFhT1AZC5_SKc=";
   @override
   Widget build(BuildContext context) {
+    DatabaseProvider dbProvider =
+        Provider.of<DatabaseProvider>(context, listen: true);
+
+    List popularWatchedSermons = dbProvider.getpopularSermon;
     return SizedBox(
       // color: Colors.grey,
       height: MediaQuery.of(context).size.height * 0.3,
@@ -28,10 +36,12 @@ class PopularSermonsComponent extends StatelessWidget {
                     color: BLACK_COLOR)),
           ),
           Expanded(
-            child: ListView.builder(
-                itemCount: 50,
-                scrollDirection: Axis.horizontal,
-                itemBuilder: (context, index) => Padding(
+            child: popularWatchedSermons.isEmpty
+                ? shimmerLaoder()
+                : ListView.builder(
+                    itemCount: popularWatchedSermons.length,
+                    scrollDirection: Axis.horizontal,
+                    itemBuilder: (context, index) => Padding(
                       padding: const EdgeInsets.only(right: 14),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -57,26 +67,40 @@ class PopularSermonsComponent extends StatelessWidget {
                                     size: 45,
                                   ),
                                   onPressed: () {
-                                    print("Play");
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => VideoPlayerView(
+                                          arguments:
+                                              popularWatchedSermons[index],
+                                        ),
+                                      ),
+                                    );
                                   },
                                 ),
                               ),
                             ),
                           ),
-                          const Text(
-                            "Author name",
-                            style: TextStyle(
+                          Text(
+                            "${popularWatchedSermons[index]['author']}",
+                            style: const TextStyle(
                                 color: BLACK_COLOR,
                                 fontSize: 16,
                                 fontWeight: FontWeight.w500),
                           ),
-                          const Text(
-                            "Sermon Title",
-                            style: TextStyle(color: Colors.grey),
-                          )
+                          SizedBox(
+                            width: 200,
+                            height: 15,
+                            child: Text(
+                              "${popularWatchedSermons[index]["title"]}",
+                              overflow: TextOverflow.ellipsis,
+                              style: const TextStyle(color: Colors.grey),
+                            ),
+                          ),
                         ],
                       ),
-                    )),
+                    ),
+                  ),
           )
         ],
       ),

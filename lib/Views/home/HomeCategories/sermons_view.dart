@@ -3,7 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:ilm_online_app/Components/most_recent_watched_sermon.dart';
 import 'package:ilm_online_app/Components/popular_sermons.dart';
-import 'package:ilm_online_app/Components/recent_sermons.dart';
+import 'package:ilm_online_app/Components/recent_articles.dart';
 import 'package:ilm_online_app/Components/recently_watched_sermon.dart';
 import 'package:ilm_online_app/Components/utils/constants.dart';
 import 'package:ilm_online_app/Components/welcome_user_header.dart';
@@ -30,7 +30,7 @@ class SermonVC extends StatelessWidget {
             RecentlyWatchedSermonsComponent(),
             PopularSermonsComponent(),
             sermonCategoryTitle(),
-            RecentSermonsComponent()
+            RecentArticlesComponent()
           ],
         ),
       ),
