@@ -19,8 +19,7 @@ class _NotificationsVCState extends State<NotificationsVC> {
   Widget build(BuildContext context) {
     UserProvider userProvider =
         Provider.of<UserProvider>(context, listen: false);
-            
-         
+
     return Scaffold(
       appBar: AppBar(),
       body: StreamBuilder<QuerySnapshot>(
@@ -31,10 +30,7 @@ class _NotificationsVCState extends State<NotificationsVC> {
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 itemBuilder: (context, index) {
                   final data = snapshot.data!.docs[index].data();
-                  Future.delayed(Duration(milliseconds: index * 100), () {
-                    userProvider.setNotificationsCountFromDB(
-                        count: snapshot.data!.docs.length);
-                  });
+
                   return NotificationCardComponent(
                     notifications: data,
                   );

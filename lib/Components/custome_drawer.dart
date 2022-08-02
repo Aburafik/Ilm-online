@@ -43,21 +43,24 @@ class AppDrawer extends StatelessWidget {
                 Navigator.pop(context);
                 Navigator.pushNamed(context, "/notification-screen");
               }),
+          // drawerTilesWidget(
+          //   context: context,
+          //   title: "Messages",
+          //   icon: FeatherIcons.messageCircle,
+          // ),
+          // drawerTilesWidget(
+          //   context: context,
+          //   title: "Friends",
+          //   icon: FeatherIcons.users,
+          // ),
           drawerTilesWidget(
-            context: context,
-            title: "Messages",
-            icon: FeatherIcons.messageCircle,
-          ),
-          drawerTilesWidget(
-            context: context,
-            title: "Friends",
-            icon: FeatherIcons.users,
-          ),
-          drawerTilesWidget(
-            context: context,
-            title: "Help",
-            icon: FeatherIcons.helpCircle,
-          ),
+              context: context,
+              title: "Q/A",
+              icon: FeatherIcons.helpCircle,
+              onTap: () {
+                Navigator.pop(context);
+                userProvider.ontap(4);
+              }),
           drawerTilesWidget(
             context: context,
             title: "Settings",

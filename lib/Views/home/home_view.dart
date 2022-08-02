@@ -18,7 +18,7 @@ class HomeVC extends StatelessWidget {
     const DiscoverVC(),
     const DonateVC(),
     const ProfileVC(),
-    const QuestionsAndAnswersVC()
+     QuestionsAndAnswersVC()
   ];
 
   HomeVC({Key? key}) : super(key: key);

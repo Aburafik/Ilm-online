@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:ilm_online_app/Components/utils/constants.dart';
 import 'package:ilm_online_app/Repository/db_repo.dart';
@@ -9,6 +10,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 FirebaseAuth _auth = FirebaseAuth.instance;
 CollectionReference users = FirebaseFirestore.instance.collection('users');
+CollectionReference chats =
+    FirebaseFirestore.instance.collection('questionsAndAnswers');
 
 class AuthUser {
   ///Store the user's information
@@ -157,4 +160,22 @@ class AuthUser {
   }
   // uploadImage
 
+  Future sendQuestion(
+      {String? senderEmail,
+      String? senderName,
+      String? senderContact,
+      String? question,
+      String? senderImageUrl,
+      BuildContext? context,
+      String? id}) async {
+    return chats.add({
+      'full_name': senderName,
+      'email': senderEmail,
+      'contact': senderContact,
+      'question': question,
+      "image_url": senderImageUrl,
+      "senderId": id,
+      'created_at': Timestamp.now().millisecondsSinceEpoch,
+    });
+  }
 }
