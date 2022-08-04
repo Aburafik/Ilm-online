@@ -10,6 +10,7 @@ class NotificationCardComponent extends StatelessWidget {
   final dynamic notifications;
   @override
   Widget build(BuildContext context) {
+    
     return Card(
       child: SizedBox(
         child: Padding(
@@ -45,8 +46,9 @@ class NotificationCardComponent extends StatelessWidget {
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.end,
-                      children: const [
-                        Text("Date and Time"),
+                      children: [
+                        Text("date",
+                            style: Theme.of(context).textTheme.caption),
                         Icon(FeatherIcons.clock, size: 15)
                       ],
                     )

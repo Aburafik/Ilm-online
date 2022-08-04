@@ -1,8 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:ilm_online_app/Components/notification_card.dart';
-import 'package:ilm_online_app/providers/user_provider.dart';
-import 'package:provider/provider.dart';
 
 class NotificationsVC extends StatefulWidget {
   const NotificationsVC({Key? key}) : super(key: key);
@@ -17,9 +15,6 @@ class _NotificationsVCState extends State<NotificationsVC> {
 
   @override
   Widget build(BuildContext context) {
-    UserProvider userProvider =
-        Provider.of<UserProvider>(context, listen: false);
-
     return Scaffold(
       appBar: AppBar(),
       body: StreamBuilder<QuerySnapshot>(

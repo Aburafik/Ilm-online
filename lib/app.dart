@@ -2,7 +2,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:ilm_online_app/Components/utils/color_theme.dart';
-import 'package:ilm_online_app/Repository/auth_repo.dart';
 import 'package:ilm_online_app/Repository/db_repo.dart';
 import 'package:ilm_online_app/Views/authentication/sign_in_view.dart';
 import 'package:ilm_online_app/Views/authentication/sign_up_view.dart';
@@ -15,7 +14,7 @@ import 'package:ilm_online_app/Views/notifications/notification_view.dart';
 import 'package:ilm_online_app/Views/profile/profile_view.dart';
 
 class MyApp extends StatefulWidget {
-  MyApp({
+ const MyApp({
     Key? key,
   }) : super(key: key);
 
@@ -72,7 +71,7 @@ class _MyAppState extends State<MyApp> {
           "/Sign-in-Screen": (context) => const SignInVC(),
           "/Sign-up-Screen": (context) => const SignUpVC(),
           "/Home-Screen": (context) => HomeVC(),
-          "/Profile-Screen": (context) => ProfileVC(),
+          "/Profile-Screen": (context) => const ProfileVC(),
           "/hadith-details": (context) => const HadithDetailsView(),
           "/video-player-view": (context) => const VideoPlayerView(),
           "/notification-screen": (context) => const NotificationsVC(),
