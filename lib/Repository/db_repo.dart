@@ -6,7 +6,8 @@ import 'package:ilm_online_app/providers/database_providers.dart';
 import 'package:ilm_online_app/providers/user_provider.dart';
 import 'package:provider/provider.dart';
 
-CollectionReference accessUserFromDB =
+
+ CollectionReference accessUserFromDB =
     FirebaseFirestore.instance.collection('users');
 final accessNewSermonFromDB =
     FirebaseFirestore.instance.collection('newSermon').get();

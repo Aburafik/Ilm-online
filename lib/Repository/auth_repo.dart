@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:ilm_online_app/Components/utils/constants.dart';
 import 'package:ilm_online_app/Repository/db_repo.dart';
@@ -12,7 +11,7 @@ FirebaseAuth _auth = FirebaseAuth.instance;
 CollectionReference users = FirebaseFirestore.instance.collection('users');
 CollectionReference chats =
     FirebaseFirestore.instance.collection('questionsAndAnswers');
-
+///0591053549
 class AuthUser {
   ///Store the user's information
   Future<void> addUser(
@@ -76,6 +75,10 @@ class AuthUser {
       showToast(msg: e.toString(), color: Colors.red);
     }
   }
+
+
+
+
 
   ////SignIn User(
 

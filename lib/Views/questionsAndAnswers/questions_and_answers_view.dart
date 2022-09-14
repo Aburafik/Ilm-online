@@ -18,9 +18,13 @@ class QuestionsAndAnswersVC extends StatefulWidget {
 
 class _QuestionsAndAnswersVCState extends State<QuestionsAndAnswersVC> {
   final TextEditingController _questionController = TextEditingController();
+
   final Stream<QuerySnapshot> _questionsAndAnswersStream =
       FirebaseFirestore.instance.collection('questionsAndAnswers').snapshots();
+
   final AuthUser _authUser = AuthUser();
+
+  ///ISAHIT
 
   final FirebaseAuth _auth = FirebaseAuth.instance;
   @override
@@ -31,7 +35,7 @@ class _QuestionsAndAnswersVCState extends State<QuestionsAndAnswersVC> {
     String senderEmail = userProvider.userData['email'] ?? "";
     String senderContact = userProvider.userData["contact"] ?? "";
     return Scaffold(
-      backgroundColor: LIGHT_YELLOW_COLOR,
+      backgroundColor: LIGHT_YELLOW_COLOR.withOpacity(.1),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Column(
@@ -42,7 +46,7 @@ class _QuestionsAndAnswersVCState extends State<QuestionsAndAnswersVC> {
                   builder: (context, snapshots) {
                     if (snapshots.hasData) {
                       return ListView.builder(
-                        reverse: true,
+                          reverse: true,
                           itemCount: snapshots.data!.docs.length,
                           itemBuilder: (context, index) {
                             dynamic data = snapshots.data!.docs[index].data();
@@ -56,9 +60,9 @@ class _QuestionsAndAnswersVCState extends State<QuestionsAndAnswersVC> {
                             return Bubble(
                               color: data["senderId"] != _auth.currentUser!.uid
                                   ? WHITE_COLOR
-                                  :const Color(0xffE1FFC7),
+                                  : const Color(0xffE1FFC7),
                               radius: const Radius.circular(20),
-                              margin:const BubbleEdges.only(top: 10),
+                              margin: const BubbleEdges.only(top: 10),
                               elevation: 0,
                               alignment:
                                   data["senderId"] == _auth.currentUser!.uid
@@ -68,7 +72,8 @@ class _QuestionsAndAnswersVCState extends State<QuestionsAndAnswersVC> {
                                   ? BubbleNip.rightTop
                                   : BubbleNip.leftTop,
                               child: Container(
-                                padding:const EdgeInsets.symmetric(horizontal: 10),
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 10),
                                 constraints: BoxConstraints(
                                   maxWidth:
                                       MediaQuery.of(context).size.width * 0.4,

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_feather_icons/flutter_feather_icons.dart';
 import 'package:ilm_online_app/Components/utils/color_theme.dart';
 
-class NotificationCardComponent extends StatelessWidget {
+ class NotificationCardComponent extends StatelessWidget {
   const NotificationCardComponent({
     Key? key,this.notifications
   }) : super(key: key);
