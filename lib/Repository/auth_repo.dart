@@ -11,6 +11,7 @@ FirebaseAuth _auth = FirebaseAuth.instance;
 CollectionReference users = FirebaseFirestore.instance.collection('users');
 CollectionReference chats =
     FirebaseFirestore.instance.collection('questionsAndAnswers');
+
 ///0591053549
 class AuthUser {
   ///Store the user's information
@@ -75,10 +76,6 @@ class AuthUser {
       showToast(msg: e.toString(), color: Colors.red);
     }
   }
-
-
-
-
 
   ////SignIn User(
 
@@ -155,7 +152,7 @@ class AuthUser {
     return users.doc(id).set({
       'full_name': fullName,
       'contact': contact,
-      'image_url': imageUrl,
+      'image_url': imageUrl ?? "",
     }, SetOptions(merge: true)).then((value) async {
       stopLoading();
       showToast(msg: "Profile Updated Successfully");

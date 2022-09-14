@@ -85,9 +85,9 @@ class ProfileViewTextFormFieldComponent extends StatelessWidget {
           decoration: InputDecoration(
             contentPadding:
                 const EdgeInsets.symmetric(vertical: 5, horizontal: 5),
-            labelText: labelText,
             filled: true,
             fillColor: LIGHT_GREY_COLOR,
+            hintText: labelText,
             // hintStyle: TextStyle(color: Colors.white),
             enabledBorder:
                 const OutlineInputBorder(borderSide: BorderSide.none),

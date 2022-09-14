@@ -72,13 +72,11 @@ class _ProfileVCState extends State<ProfileVC> {
     setState(() {
       _image = imageFile;
     });
-    print(imageFile);
   }
 
   String userID = FirebaseAuth.instance.currentUser!.uid;
   //////// Upload image file function
   Future<String> uploadFile({File? file, String? userUid}) async {
-    print(userID);
     try {
       ////get The path of cloud storage
       Reference storageRef = _firebaseStorage
@@ -103,6 +101,7 @@ class _ProfileVCState extends State<ProfileVC> {
       return await snapshot.ref.getDownloadURL();
     } catch (e) {
       debugPrint('############ $e');
+      // ignore: null_check_always_fails
       return null!;
     }
   }
@@ -114,13 +113,18 @@ class _ProfileVCState extends State<ProfileVC> {
 
   TextEditingController nameController = TextEditingController();
 
+  String? userName;
+  String? userContact;
+
   @override
   Widget build(BuildContext context) {
     UserProvider userProvider =
         Provider.of<UserProvider>(context, listen: true);
     emailController.text = userProvider.userData['email'] ?? "";
-    phoneController.text = userProvider.userData['contact'] ?? "";
-    nameController.text = userProvider.userData['full_name'] ?? "";
+    userContact = userProvider.userData['contact'] ?? "";
+    userName = userProvider.userData['full_name'] ?? "";
+
+    print(userContact);
     return Scaffold(
       body: Center(
         child: Padding(
@@ -173,6 +177,7 @@ class _ProfileVCState extends State<ProfileVC> {
                   ),
                 ),
                 ProfileViewTextFormFieldComponent(
+                  labelText: userName,
                   textEditingController: nameController,
                 ),
                 ProfileViewTextFormFieldComponent(
@@ -183,6 +188,7 @@ class _ProfileVCState extends State<ProfileVC> {
                   textEditingController: emailController,
                 ),
                 ProfileViewTextFormFieldComponent(
+                  labelText: userContact,
                   textEditingController: phoneController,
                 ),
                 commonButton(

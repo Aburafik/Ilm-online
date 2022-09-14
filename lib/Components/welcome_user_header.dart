@@ -25,7 +25,7 @@ class WelcomeUserComponent extends StatelessWidget {
         const Padding(
           padding: EdgeInsets.only(top: 5, bottom: 8),
           child: Text(
-            "Welcome to the Ilm Online App!",
+            "Welcome to Online App!",
             style: TextStyle(
                 color: BLACK_COLOR, fontSize: 16, fontWeight: FontWeight.w500),
           ),
@@ -34,6 +34,7 @@ class WelcomeUserComponent extends StatelessWidget {
           "We promise to keep you up to date with the latest Sermons and hope that you will be blessed with our content",
           style: TextStyle(color: Colors.grey),
         ),
+        const SizedBox(height: 10)
       ],
     );
   }
