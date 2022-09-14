@@ -66,7 +66,8 @@ class DefaultFirebaseOptions {
     messagingSenderId: '176656721543',
     projectId: 'ilm-online',
     storageBucket: 'ilm-online.appspot.com',
-    iosClientId: '176656721543-aqpgps7asb0d3gkt7fnu3o7196a9c73j.apps.googleusercontent.com',
+    iosClientId:
+        '176656721543-aqpgps7asb0d3gkt7fnu3o7196a9c73j.apps.googleusercontent.com',
     iosBundleId: 'com.example.ilmOnlineApp',
   );
 
@@ -76,7 +77,8 @@ class DefaultFirebaseOptions {
     messagingSenderId: '176656721543',
     projectId: 'ilm-online',
     storageBucket: 'ilm-online.appspot.com',
-    iosClientId: '176656721543-aqpgps7asb0d3gkt7fnu3o7196a9c73j.apps.googleusercontent.com',
+    iosClientId:
+        '176656721543-aqpgps7asb0d3gkt7fnu3o7196a9c73j.apps.googleusercontent.com',
     iosBundleId: 'com.example.ilmOnlineApp',
   );
 }
