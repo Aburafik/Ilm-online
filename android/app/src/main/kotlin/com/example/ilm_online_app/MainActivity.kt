@@ -1,4 +1,4 @@
-package com.example.ilm_online_app
+package com.citizenraf.ilm_online_app
 
 import io.flutter.embedding.android.FlutterActivity
 

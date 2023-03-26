@@ -7,9 +7,9 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:176656721543:android:dfe004999780e04d6ffa22",
+        "mobilesdk_app_id": "1:176656721543:android:c4e3b2383dec77cb6ffa22",
         "android_client_info": {
-          "package_name": "com.example.ilm_online_app"
+          "package_name": "com.citizenraf.ilm_online_app"
         }
       },
       "oauth_client": [
@@ -29,6 +29,13 @@
             {
               "client_id": "176656721543-jgn9qto7l4td213nciqoq1ghl9pkqfu3.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "176656721543-aqpgps7asb0d3gkt7fnu3o7196a9c73j.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.ilmOnlineApp"
+              }
             }
           ]
         }

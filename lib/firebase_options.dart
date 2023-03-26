@@ -44,35 +44,36 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyDMAB7KuxBaAfGmDi4LcdzeLLQqy0zUSDM',
+    apiKey: 'AIzaSyAOpDC8rIAa56bL9FfLIBzEfi-hPMDQ3Qk',
     appId: '1:176656721543:web:c6a774b8975de3b36ffa22',
     messagingSenderId: '176656721543',
     projectId: 'ilm-online',
     authDomain: 'ilm-online.firebaseapp.com',
     storageBucket: 'ilm-online.appspot.com',
+    measurementId: 'G-1913ETHG81',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyAOpDC8rIAa56bL9FfLIBzEfi-hPMDQ3Qk',
-    appId: '1:176656721543:android:dfe004999780e04d6ffa22',
+    appId: '1:176656721543:android:c4e3b2383dec77cb6ffa22',
     messagingSenderId: '176656721543',
     projectId: 'ilm-online',
     storageBucket: 'ilm-online.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyAb4gVpOZco1t-TQQr62oEAyC3ztkrNsEo',
-    appId: '1:176656721543:ios:1b0bb6f1832187556ffa22',
+    apiKey: 'AIzaSyAOpDC8rIAa56bL9FfLIBzEfi-hPMDQ3Qk',
+    appId: '1:176656721543:ios:897cdad9219d067a6ffa22',
     messagingSenderId: '176656721543',
     projectId: 'ilm-online',
     storageBucket: 'ilm-online.appspot.com',
     iosClientId:
-        '176656721543-aqpgps7asb0d3gkt7fnu3o7196a9c73j.apps.googleusercontent.com',
-    iosBundleId: 'com.example.ilmOnlineApp',
+        '176656721543-5t6a8fj2t3hf0c50v780avkgnis0vrbs.apps.googleusercontent.com',
+    iosBundleId: 'com.citizenraf.ilmOnlineApp',
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
-    apiKey: 'AIzaSyAb4gVpOZco1t-TQQr62oEAyC3ztkrNsEo',
+    apiKey: 'AIzaSyAOpDC8rIAa56bL9FfLIBzEfi-hPMDQ3Qk',
     appId: '1:176656721543:ios:1b0bb6f1832187556ffa22',
     messagingSenderId: '176656721543',
     projectId: 'ilm-online',

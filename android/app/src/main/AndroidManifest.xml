@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.ilm_online_app">
+    package="com.citizenraf.ilm_online_app">
     <uses-permission android:name="android.permission.INTERNET"/>
 
    <application

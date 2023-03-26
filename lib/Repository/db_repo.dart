@@ -42,11 +42,11 @@ getNewSermon(BuildContext context) async {
     DatabaseProvider dbProvider =
         Provider.of<DatabaseProvider>(context, listen: false);
     final data = value.docs[0].data();
-    print("...........the data is ..................");
+    // print("...........the data is ..................");
     // print(data);
     dbProvider.setNewSermon(data);
 
-    print("...........the data is ..................");
+    // print("...........the data is ..................");
   }, onError: (e) => print("Error getting document: $e"));
 }
 
@@ -55,8 +55,8 @@ getRecentSermon(BuildContext context) async {
     DatabaseProvider dbProvider =
         Provider.of<DatabaseProvider>(context, listen: false);
     final data = value.docs.map((e) => e.data()).toList();
-    print("...........the data is ..................");
-    print(data);
+    // print("...........the data is ..................");
+    // print(data);
     dbProvider.setRecentSermon(data);
 
     print("...........the data is ..................");
@@ -68,11 +68,11 @@ getpopularSermon(BuildContext context) async {
     DatabaseProvider dbProvider =
         Provider.of<DatabaseProvider>(context, listen: false);
     final data = value.docs.map((e) => e.data()).toList();
-    print("...........the data is ..................");
-    print(data);
+    // print("...........the data is ..................");
+    // print(data);
     dbProvider.setPopularSermon(data);
 
-    print("...........the data is ..................");
+    // print("...........the data is ..................");
   }, onError: (e) => print("Error getting document: $e"));
 }
 
@@ -81,10 +81,10 @@ getArticles(BuildContext context) async {
     DatabaseProvider dbProvider =
         Provider.of<DatabaseProvider>(context, listen: false);
     final data = value.docs.map((e) => e.data()).toList();
-    print("...........the data is ..................");
-    print(data);
+    // print("...........the data is ..................");
+    // print(data);
     dbProvider.setArticles(data);
 
-    print("...........the data is ..................");
+    // print("...........the data is ..................");
   }, onError: (e) => print("Error getting document: $e"));
 }

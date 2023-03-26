@@ -178,4 +178,5 @@ class AuthUser {
       'created_at': Timestamp.now().millisecondsSinceEpoch,
     });
   }
+  
 }
